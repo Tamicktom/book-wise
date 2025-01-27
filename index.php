@@ -4,13 +4,12 @@ $search = $_GET['search'] ?? '';
 
 // import books from books.php
 require_once '_books.php';
-require_once 'book-card.php';
 
 $filtered_books = [];
 
 if ($search) {
   foreach ($books as $book) {
-    if (strpos(strtolower($book['title']), strtolower($search)) !== false) {
+    if (strpos(strtolower($book->title), strtolower($search)) !== false) {
       $filtered_books[] = $book;
     }
   }
@@ -71,7 +70,7 @@ if ($search) {
        * Loop through the filtered books and display them
        */
       foreach ($filtered_books as $book) {
-        book_card($book);
+        $book->render();
       }
       ?>
 
