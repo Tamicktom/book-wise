@@ -1,9 +1,8 @@
-<?php 
+<?php
 // grab the search from the searchParams
 $search = $_GET['search'] ?? '';
 
 if ($search) {
-  
 }
 ?>
 
@@ -45,14 +44,30 @@ if ($search) {
         id="search-input"
         class="p-2 text-sm border-2 rounded-md border-stone-800 bg-stone-900 text-stone-200 focus:outline-none focus:border-lime-500"
         placeholder="Pesquisar"
-        value="<?php echo $search; ?>"
-      />
+        value="<?php echo $search; ?>" />
       <button type="submit">🔍</button>
     </form>
 
-    <section class="space-y-4">
-      Lista final
-    </div>
+    <section class="grid grid-cols-3 gap-2 space-y-4">
+
+      <div class="grid grid-cols-4 col-span-1 gap-2 p-2 transition-all border-2 rounded border-stone-800 hover:bg-stone-800">
+        <div class="col-span-1 overflow-hidden rounded">
+          <img
+            src="https://i.pinimg.com/736x/92/9b/6b/929b6bceaea9375dc515c099aad59892.jpg"
+            alt="Imagem do livro"
+            class="object-cover size-full" />
+        </div>
+        <div class="col-span-3">
+          <div class="font-semibold">Título</div>
+          <div class="text-xs italic">Autor</div>
+          <div class="text-xs italic">⭐⭐⭐⭐⭐ (3 Avaliações)</div>
+          <div class="text-sm text-stone-400">
+            Descrição curta
+          </div>
+        </div>
+      </div>
+
+    </section>
   </main>
 </body>
 
