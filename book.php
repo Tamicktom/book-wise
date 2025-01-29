@@ -1,5 +1,5 @@
 <?php
-//grab the book id from the query string. Example: book.php?id=1
+//* grab the book id from the query string. Example: book.php?id=1
 $book_id = $_GET['id'];
 
 //import books from books.php
