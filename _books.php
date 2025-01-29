@@ -38,14 +38,14 @@ class Book
     $book_url = $this->getBookUrl();
 
     $html = <<<HTML
-      <div class="grid h-48 grid-cols-5 col-span-1 gap-2 p-2 transition-all border-2 rounded border-stone-800 hover:bg-stone-800">
-        <a href="{$book_url}" class="h-full col-span-2 overflow-hidden rounded">
+      <div class="grid h-48 grid-cols-5 col-span-1 transition-all border-2 rounded border-stone-800 hover:bg-stone-800 overflow-hidden group">
+        <a href="{$book_url}" class="h-full col-span-2 overflow-hidden">
           <img
             src="{$this->image}"
             alt="Imagem do livro"
-            class="object-cover size-full" />
+            class="object-cover size-full group-hover:scale-[1.1] transition-all" />
         </a>
-        <div class="col-span-3 flex flex-col justify-start gap-2">
+        <div class="col-span-3 flex flex-col justify-start gap-2 p-2">
           <a href="{$book_url}" class="font-semibold hover:underline">
             {$this->title}
           </a>
