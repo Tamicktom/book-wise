@@ -5,12 +5,16 @@ $book_id = $_GET['id'];
 //import books from books.php
 require_once '_books.php';
 
-$book = $books[$book_id - 1];
+$book = array_filter($books, function ($book) use ($book_id) {
+  return $book->id == $book_id;
+});
+
+$book = array_pop($book);
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
