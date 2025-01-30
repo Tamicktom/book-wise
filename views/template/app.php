@@ -66,6 +66,10 @@ if ($search) {
     <section class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
 
       <?php
+      var_dump($view);
+      ?>
+
+      <?php
       /**
        * Loop through the filtered books and display them
        */
