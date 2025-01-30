@@ -21,7 +21,7 @@ $book = array_pop($book);
   <title>Bookwise - <?= $book->title ?></title>
 </head>
 
-<body>
+<body class="bg-stone-950 text-stone-200">
   <h1>
     <?= $book->title ?>
   </h1>
