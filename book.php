@@ -9,22 +9,5 @@ $book = array_filter($books, fn($book) => $book->id == $book_id);
 
 $book = array_pop($book);
 
-?>
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-  <title>Bookwise - <?= $book->title ?></title>
-</head>
-
-<body class="bg-stone-950 text-stone-200">
-  <h1>
-    <?= $book->title ?>
-  </h1>
-</body>
-
-</html>
+$view = 'book';
+require "views/template/app.php";

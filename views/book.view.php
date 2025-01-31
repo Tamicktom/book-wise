@@ -1,0 +1,4 @@
+
+<section>
+  <?= $book->title ?>
+</section>
