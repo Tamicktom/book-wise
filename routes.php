@@ -8,12 +8,12 @@ $routes = [
   "/my-books" => "my-books",
 ];
 
-function clearRouteSearchParams($route)
+function clearRouteSearchParams($route): String
 {
   return explode("?", $route)[0];
 }
 
-function getRouteOrDefault()
+function getRouteOrDefault(): String
 {
   global $request_url, $routes;
   $route = clearRouteSearchParams($request_url);
