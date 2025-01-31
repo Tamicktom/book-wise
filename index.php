@@ -7,6 +7,7 @@ $request_url = $_SERVER["REQUEST_URI"];
 $routes = [
   "/" => "index",
   "/book" => "book",
+  "/my-books" => "my-books",
 ];
 
 function clearRouteSearchParams($route)

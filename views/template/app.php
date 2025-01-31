@@ -19,12 +19,12 @@
           <a href="/" class="text-lime-500">Explorar</a>
         </li>
         <li>
-          <a href="/my-books.php" class="hover:underline">Meus Livros</a>
+          <a href="/my-books" class="hover:underline">Meus Livros</a>
         </li>
       </ul>
       <ul>
         <li>
-          <a href="/login.php" class="hover:underline">Login</a>
+          <a href="/login" class="hover:underline">Login</a>
         </li>
       </ul>
     </nav>
