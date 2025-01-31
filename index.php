@@ -21,6 +21,8 @@ function getRouteOrDefault($routes, $request_url)
   return $routes[$route] ?? "404";
 }
 
-$view = getRouteOrDefault($routes, $request_url);
+global $controller;
 
-require "views/template/app.php";
+$controller = getRouteOrDefault($routes, $request_url);
+
+require "controllers/{$controller}.controller.php";

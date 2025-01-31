@@ -32,7 +32,7 @@
 
   <main class="flex flex-col items-center justify-start max-w-screen-lg mx-auto space-y-6">
     <?php
-    require "views/{$view}.view.php";
+    require $view;
     ?>
   </main>
 </body>

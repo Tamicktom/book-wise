@@ -30,7 +30,7 @@ class Book
 
     public function getBookUrl(): string
     {
-        return "/book.php?id=" . $this->id;
+        return "/book?id=" . $this->id;
     }
 
     public function render()
