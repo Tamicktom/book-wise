@@ -1,7 +1,5 @@
 <?php
-//* grab the book id from the query string. Example: book.php?id=1
-global $books;
-global $view;
+require "_books.php";
 
 $view = 'views/book.view.php';
 

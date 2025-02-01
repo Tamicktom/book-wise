@@ -1,5 +1,6 @@
 <?php
 
+require "_books.php";
 // grab the search from the searchParams
 $search = $_GET['search'] ?? '';
 

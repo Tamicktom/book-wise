@@ -1,8 +1,4 @@
 <?php
 
-require "_books.php";
+require "functions.php";
 require "routes.php";
-
-$controller = getRouteOrDefault();
-
-require "controllers/{$controller}.controller.php";

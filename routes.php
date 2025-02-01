@@ -19,3 +19,11 @@ function getRouteOrDefault(): String
   $route = clearRouteSearchParams($request_url);
   return $routes[$route] ?? "404";
 }
+
+$controller = getRouteOrDefault();
+
+if (!file_exists("controllers/{$controller}.controller.php")) {
+  $controller = "404";
+} else {
+  require "controllers/{$controller}.controller.php";
+}
