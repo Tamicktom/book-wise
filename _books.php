@@ -38,28 +38,39 @@ class Book
     $book_url = $this->getBookUrl();
 
     $html = <<<HTML
-      <div class="grid h-48 grid-cols-5 col-span-1 transition-all border-2 rounded border-stone-800 hover:bg-stone-800 overflow-hidden group">
-        <a href="{$book_url}" class="h-full col-span-2 overflow-hidden">
-          <img
-            src="{$this->image}"
-            alt="Imagem do livro"
-            class="object-cover size-full group-hover:scale-[1.1] transition-all" />
-        </a>
-        <div class="col-span-3 flex flex-col justify-start gap-2 p-2">
-          <a href="{$book_url}" class="font-semibold hover:underline">
-            {$this->title}
+      <article class="grid h-48 grid-cols-5 col-span-1 transition-all border-2 rounded border-stone-800 hover:bg-stone-800 overflow-hidden group">
+        <figure class="h-full col-span-2 overflow-hidden">
+          <a href="{$book_url}">
+            <img
+              id="book-image-{$this->id}"
+              src="{$this->image}"
+              alt="Capa do livro {$this->title}"
+              class="object-cover size-full group-hover:scale-[1.1] transition-all" />
           </a>
-          <div class="text-xs italic">
+        </figure>
+        <section class="col-span-3 flex flex-col justify-start gap-2 p-2">
+          <h2>
+            <a href="{$book_url}" class="font-semibold hover:underline">
+              {$this->title}
+            </a>
+          </h2>
+          <p 
+          id="book-author-{$this->id}"
+          class="text-xs italic not-italic">
             {$this->author}
-          </div>
-          <div class="text-xs italic">
+          </p>
+          <div 
+          id="book-rating-{$this->id}"
+          role="img" aria-label="Avaliação: {$this->rating} estrelas" class="text-xs">
             {$this->getRating()}
           </div>
-          <div class="text-sm text-stone-400 h-fit line-clamp-3">
+          <p 
+          id="book-description-{$this->id}"
+          class="text-sm text-stone-400 h-fit line-clamp-3">
             {$this->description}
-          </div>
-        </div>
-      </div>
+          </p>
+        </section>
+      </article>
     HTML;
 
     echo $html;
