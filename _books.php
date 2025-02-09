@@ -96,16 +96,15 @@ function convert_query_to_books($query)
   }, $query);
 }
 
+# query can be an array or a single object
+function convert_query_to_book($query)
+{
+  // if is not an array, return a single book
+  if (!is_array($query)) {
+    return new Book($query);
+  } else {
+    return convert_query_to_books($query)[0];
+  }
+}
 
 $books = convert_query_to_books($books_query);
-
-// $books = array_map(function ($book) {
-//   return new Book(
-//     $book['id'],
-//     $book['title'],
-//     $book['author'],
-//     $book['rating'],
-//     $book['description'],
-//     $book['image']
-//   );
-// }, $books_query);
