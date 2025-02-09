@@ -8,8 +8,13 @@ $book_id = $_GET['id'];
 //import books from books.php
 require_once '_books.php';
 
-$book = array_filter($books, fn($book) => $book->id == $book_id);
+$db = new PDO('sqlite:db.sqlite');
 
-$book = array_pop($book);
+$query = $db->prepare('SELECT * FROM books WHERE id = ?');
+$query->execute([$book_id]);
+
+$query_book = $query->fetch();
+
+$book = new Book($query_book);
 
 require 'views/template/app.php';
