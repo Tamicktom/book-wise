@@ -16,6 +16,7 @@ class Book
   public string $description;
   public string $image_url;
   public float $rating;
+  public int $rating_quantity;
   public int $release_year;
   public int $number_of_pages;
 
@@ -29,14 +30,20 @@ class Book
     $this->rating = $args['rating'];
     $this->release_year = $args['release_year'];
     $this->number_of_pages = $args['number_of_pages'];
+    $this->rating_quantity = $args['rating_quantity'];
   }
 
   public function getRating()
   {
     $rating = '';
-    for ($i = 0; $i < $this->rating; $i++) {
-      $rating .= '⭐';
+    $int_from_rating = intval($this->rating);
+    $rest_from_rating = $this->rating - $int_from_rating;
+    $rating = str_repeat('★', $int_from_rating);
+    
+    if ($rest_from_rating >= 0.5) {
+      $rating .= '⯪';
     }
+
     return $rating;
   }
 
@@ -73,8 +80,8 @@ class Book
           </p>
           <div 
           id="book-rating-{$this->id}"
-          role="img" aria-label="Avaliação: {$this->rating} estrelas" class="text-xs">
-            {$this->getRating()}
+          role="img" aria-label="Avaliação: {$this->rating} estrelas" class="text-xl text-base/2">
+            {$this->getRating()} ({$this->rating_quantity})
           </div>
           <p 
           id="book-description-{$this->id}"
