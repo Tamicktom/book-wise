@@ -15,7 +15,7 @@
   /**
    * Loop through the filtered books and display them
    */
-  foreach ($filtered_books as $book) {
+  foreach ($books as $book) {
     $book->render();
   }
 

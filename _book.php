@@ -1,13 +1,5 @@
 <?php
 
-$db = new PDO('sqlite:db.sqlite');
-
-$query = $db->query('SELECT * FROM books');
-
-global $books;
-
-$books_query = $query->fetchAll();
-
 class Book
 {
   public string $id;
@@ -15,6 +7,7 @@ class Book
   public string $author;
   public string $description;
   public string $image_url;
+  public string $predominant_color;
   public float $rating;
   public int $rating_quantity;
   public int $release_year;
@@ -27,6 +20,7 @@ class Book
     $this->author = $args['author'];
     $this->description = $args['description'];
     $this->image_url = $args['image_url'];
+    $this->predominant_color = $args['predominant_color'];
     $this->rating = $args['rating'];
     $this->release_year = $args['release_year'];
     $this->number_of_pages = $args['number_of_pages'];
@@ -39,7 +33,7 @@ class Book
     $int_from_rating = intval($this->rating);
     $rest_from_rating = $this->rating - $int_from_rating;
     $rating = str_repeat('★', $int_from_rating);
-    
+
     if ($rest_from_rating >= 0.5) {
       $rating .= '⯪';
     }
@@ -56,15 +50,23 @@ class Book
   {
     $book_url = $this->getBookUrl();
 
+    $style = "
+      background-color: #{$this->predominant_color}40;
+      border-color: #{$this->predominant_color}80;
+    ";
+
     $html = <<<HTML
-      <article class="grid h-48 grid-cols-5 col-span-1 transition-all border-2 rounded border-stone-800 hover:bg-stone-800 overflow-hidden group">
+      <article 
+        class="grid h-48 grid-cols-5 col-span-1 transition-all border-2 rounded overflow-hidden group"
+        style="{$style}"
+      >
         <figure class="h-full col-span-2 overflow-hidden">
           <a href="{$book_url}">
             <img
               id="book-image-{$this->id}"
               src="{$this->image_url}"
               alt="Capa do livro {$this->title}"
-              class="object-cover size-full group-hover:scale-[1.1] transition-all" />
+              class="object-cover size-full group-hover:scale-[1.1] transition-all duration-300" />
           </a>
         </figure>
         <section class="col-span-3 flex flex-col justify-start gap-2 p-2">
@@ -95,12 +97,3 @@ class Book
     echo $html;
   }
 }
-
-function convert_query_to_books($query)
-{
-  return array_map(function ($book) {
-    return new Book($book);
-  }, $query);
-}
-
-$books = convert_query_to_books($books_query);

@@ -1,23 +1,12 @@
 <?php
 
-require "_books.php";
 // grab the search from the searchParams
 $search = $_GET['search'] ?? '';
 
-// import books from books.php
-require_once '_books.php';
+require_once "db.php";
 
-$filtered_books = [];
-
-if ($search) {
-  foreach ($books as $book) {
-    if (strpos(strtolower($book->title), strtolower($search)) !== false) {
-      $filtered_books[] = $book;
-    }
-  }
-} else {
-  $filtered_books = $books;
-}
+// get all books from the database
+$books = $db->books(strtolower($search));
 
 $view = "views/index.view.php";
 
