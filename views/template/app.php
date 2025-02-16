@@ -8,7 +8,7 @@
   <title>BookWise</title>
 </head>
 
-<body class="bg-stone-950 text-stone-200">
+<body class="bg-store-100 dark:bg-stone-950 text-stone-200">
   <header class="shadow-lg bg-stone-900">
     <nav class="flex justify-between max-w-screen-lg px-8 py-4 mx-auto items-center">
       <a href="/">
@@ -36,7 +36,7 @@
 
   <main class="flex flex-col items-center justify-start max-w-screen-lg mx-auto space-y-6 pb-20">
     <?php
-    require $view;
+      require $view;
     ?>
   </main>
 </body>

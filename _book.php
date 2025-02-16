@@ -57,7 +57,7 @@ class Book
 
     $html = <<<HTML
       <article 
-        class="grid h-48 grid-cols-5 col-span-1 transition-all border-2 rounded overflow-hidden group"
+        class="grid h-48 grid-cols-5 col-span-1 transition-all border-2 rounded overflow-hidden group backdrop-blur-md"
         style="{$style}"
       >
         <figure class="h-full col-span-2 overflow-hidden">
@@ -66,28 +66,33 @@ class Book
               id="book-image-{$this->id}"
               src="{$this->image_url}"
               alt="Capa do livro {$this->title}"
-              class="object-cover size-full group-hover:scale-[1.1] transition-all duration-300" />
+              class="object-cover size-full group-hover:scale-[1.1] transition-all duration-300"
+            />
           </a>
         </figure>
         <section class="col-span-3 flex flex-col justify-start gap-2 p-2">
           <h2>
-            <a href="{$book_url}" class="font-semibold hover:underline">
+            <a href="{$book_url}" class="text-stone-900 dark:text-stone-100 font-semibold hover:underline">
               {$this->title}
             </a>
           </h2>
           <p 
-          id="book-author-{$this->id}"
-          class="text-xs italic not-italic">
+            id="book-author-{$this->id}"
+            class="text-xs italic not-italic text-stone-700 dark:text-stone-300"
+          >
             {$this->author}
           </p>
           <div 
-          id="book-rating-{$this->id}"
-          role="img" aria-label="Avaliação: {$this->rating} estrelas" class="text-xl text-base/2">
+            id="book-rating-{$this->id}"
+            role="img" aria-label="Avaliação: {$this->rating} estrelas" 
+            class="text-xl text-base/2 text-stone-600 dark:text-stone-300"
+          >
             {$this->getRating()} ({$this->rating_quantity})
           </div>
           <p 
-          id="book-description-{$this->id}"
-          class="text-sm text-stone-400 h-fit line-clamp-3">
+            id="book-description-{$this->id}"
+            class="text-sm text-stone-600 h-fit line-clamp-3 dark:text-stone-400"
+          >
             {$this->description}
           </p>
         </section>
@@ -105,12 +110,8 @@ class Book
 
   public static function makeMany($items)
   {
-    $books = [];
-
-    foreach ($items as $item) {
-      $books[] = self::make($item);
-    }
-
-    return $books;
+    return array_map(function ($item) {
+      return self::make($item);
+    }, $items);
   }
 }
