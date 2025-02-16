@@ -4,8 +4,10 @@ $view = 'views/book.view.php';
 
 $book_id = $_GET['id'];
 
-require_once "db.php";
+require_once 'models/book.model.php';
 
-$book = $db->book($book_id);
+$book_model = new BookModel();
+
+$book = $book_model->getBook($book_id);
 
 require 'views/template/app.php';
