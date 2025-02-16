@@ -96,4 +96,21 @@ class Book
 
     echo $html;
   }
+
+  public static function make($item)
+  {
+    $book = new self($item);
+    return $book;
+  }
+
+  public static function makeMany($items)
+  {
+    $books = [];
+
+    foreach ($items as $item) {
+      $books[] = self::make($item);
+    }
+
+    return $books;
+  }
 }

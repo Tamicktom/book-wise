@@ -5,25 +5,32 @@ require_once '_book.php';
 
 class BookModel extends Model
 {
-  public function getBooks(string $search = '')
+  public function getBooks(string $search = '', int $limit = 10)
   {
-    $sql = "SELECT * FROM books WHERE title LIKE '%$search%' OR author LIKE '%$search%' LIMIT 10";
-    $queried_books = $this->db->query($sql);
+    $sql = "
+      SELECT * FROM books 
+      WHERE title LIKE :search OR author LIKE :search 
+      LIMIT :limit
+    ";
 
-    $books = [];
+    $params = [
+      'search' => '%' . $search . '%',
+      'limit' => $limit
+    ];
 
-    foreach ($queried_books as $book) {
-      $books[] = new Book($book);
-    }
+    $queried_books = $this->db->query($sql, $params);
 
-    return $books;
+    return Book::makeMany($queried_books);
   }
 
   public function getBook(string $id)
   {
-    $sql = "SELECT * FROM books WHERE id = $id";
-    $queried_book = $this->db->query($sql);
+    // $sql = "SELECT * FROM books WHERE id = $id";
+    $sql = "SELECT * FROM books WHERE id = :id";
+    $params = ['id' => $id];
 
-    return new Book($queried_book[0]);
+    $queried_book = $this->db->query($sql, $params);
+
+    return Book::make($queried_book[0]);
   }
 }

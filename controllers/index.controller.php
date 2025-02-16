@@ -8,7 +8,7 @@ require_once 'models/book.model.php';
 $book_model = new BookModel();
 
 // get all books from the database
-$books = $book_model->getBooks(strtolower($search));
+$books = $book_model->getBooks(strtolower($search), 20);
 
 $view = "views/index.view.php";
 

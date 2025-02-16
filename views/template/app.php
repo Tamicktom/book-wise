@@ -34,7 +34,7 @@
     </nav>
   </header>
 
-  <main class="flex flex-col items-center justify-start max-w-screen-lg mx-auto space-y-6">
+  <main class="flex flex-col items-center justify-start max-w-screen-lg mx-auto space-y-6 pb-20">
     <?php
     require $view;
     ?>
