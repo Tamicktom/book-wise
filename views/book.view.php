@@ -32,3 +32,12 @@
     </p>
   </article>
 </main>
+
+<script>
+  // go back one page if "esc" key is pressed
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      window.history.back();
+    }
+  });
+</script>
