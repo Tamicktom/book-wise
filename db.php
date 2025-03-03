@@ -9,7 +9,18 @@ class DB
 
   public function __construct()
   {
-    $this->pdo = new PDO("sqlite:db.sqlite");
+    $config = [
+      'driver' => 'sqlite',
+      'database' => 'db.sqlite',
+    ];
+
+    $connectionString = sprintf(
+      "%s:%s",
+      $config['driver'],
+      $config['database']
+    );
+
+    $this->pdo = new PDO($connectionString);
   }
 
   public function query(string $unprepared_sql, array $params = [])
