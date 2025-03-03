@@ -9,10 +9,7 @@ class DB
 
   public function __construct()
   {
-    $config = [
-      'driver' => 'sqlite',
-      'database' => 'db.sqlite',
-    ];
+    $config = require('config.php');
 
     $connectionString = sprintf(
       "%s:%s",
