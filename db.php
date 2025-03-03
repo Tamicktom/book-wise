@@ -13,8 +13,8 @@ class DB
 
     $connectionString = sprintf(
       "%s:%s",
-      $config['driver'],
-      $config['database']
+      $config['database']['driver'],
+      $config['database']['database']
     );
 
     $this->pdo = new PDO($connectionString);

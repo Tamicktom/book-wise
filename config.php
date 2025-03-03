@@ -1,6 +1,8 @@
 <?php
 
 return [
-  'driver' => 'sqlite',
-  'database' => 'db.sqlite',
+  'database' => [
+    'driver' => 'sqlite',
+    'database' => 'db.sqlite',
+  ]
 ];
