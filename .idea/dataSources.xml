@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/laravel</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="locav@45.178.225.120" uuid="f16560d4-da1f-4a3a-ae37-80f1d247fbf2">
+    <data-source source="LOCAL" name="locav dev" uuid="f16560d4-da1f-4a3a-ae37-80f1d247fbf2">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
@@ -35,6 +35,13 @@
       <remarks>projeto pessoal com o gabriel</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="locav prod" uuid="93a0597d-1552-46a3-ad7b-52dd1f16a062">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://45.178.225.220:5432/locav</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

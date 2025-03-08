@@ -8,7 +8,7 @@
   <title>BookWise</title>
 </head>
 
-<body class="bg-store-100 dark:bg-stone-950 text-stone-200">
+<body class="bg-stone-100 dark:bg-stone-950 text-stone-200">
   <header class="shadow-lg bg-stone-900">
     <nav class="flex justify-between max-w-screen-lg px-8 py-4 mx-auto items-center">
       <a href="/">
