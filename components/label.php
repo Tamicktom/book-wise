@@ -5,7 +5,7 @@ class Label
   public string $id = "";
   public string $for = "";
   public string $text = "";
-  public string $class = "text-sm font-medium text-stone-800 dark:text-stone-200";
+  public string $class = "text-sm font-medium text-stone-600 dark:text-stone-200";
 
   public function render(): string
   {

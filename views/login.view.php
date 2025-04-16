@@ -20,6 +20,7 @@ require 'components/label.php';
       $email_input->name = "email";
       $email_input->placeholder = "Email";
       $email_input->type = InputType::EMAIL;
+      $email_input->required = true;
       echo $email_input->render();
 
       $label = new Label();
@@ -32,6 +33,7 @@ require 'components/label.php';
       $password_input->name = "password";
       $password_input->placeholder = "Senha";
       $password_input->type = InputType::PASSWORD;
+      $password_input->required = true;
       echo $password_input->render();
 
       ?>
