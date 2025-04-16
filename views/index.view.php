@@ -1,11 +1,17 @@
+<?php
+
+require 'components/input.php';
+
+$search_input = new Input();
+$search_input->id = "search-input";
+$search_input->name = "search";
+$search_input->placeholder = "Pesquisar";
+$search_input->value = $search ?? '';
+
+?>
+
 <form action="" class="flex items-center justify-center w-full gap-2 pt-6">
-  <input
-    type="text"
-    name="search"
-    id="search-input"
-    class="w-full max-w-xs p-2 text-sm transition-all border-2 rounded-md border-stone-800 bg-stone-100 text-stone-800 dark:text-stone-200 focus:outline-none focus:border-lime-500 dark:bg-stone-900 placeholder-stone-700 dark:placeholder-stone-300"
-    placeholder="Pesquisar"
-    value="<?php echo $search; ?>" />
+  <?php echo $search_input->render(); ?>
   <button type="submit">🔍</button>
 </form>
 
