@@ -18,6 +18,23 @@ require 'components/button.php';
         <div>
           <?php
           $label = new Label();
+          $label->for = "name-input";
+          $label->text = "Nome";
+          echo $label->render();
+
+          $email_input = new Input();
+          $email_input->id = "name-input";
+          $email_input->name = "name";
+          $email_input->placeholder = "Nome";
+          $email_input->type = InputType::TEXT;
+          $email_input->required = true;
+          echo $email_input->render();
+          ?>
+        </div>
+
+        <div>
+          <?php
+          $label = new Label();
           $label->for = "email-input";
           $label->text = "Email";
           echo $label->render();
