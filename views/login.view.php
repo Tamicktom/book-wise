@@ -14,7 +14,7 @@ require 'components/button.php';
         Login
       </h1>
 
-      <form action="" method="post" class="flex flex-col gap-2 p-4 space-y-2">
+      <form action="" method="POST" class="flex flex-col gap-2 p-4 space-y-2">
         <div>
           <?php
           $label = new Label();
