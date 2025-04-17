@@ -8,12 +8,12 @@ require 'components/label.php';
 <div class="grid w-full grid-cols-2 gap-2 pt-6">
 
   <div class="flex items-center justify-center col-span-2">
-    <form action="" method="post" class="flex flex-col border rounded border-stone-700">
-      <h1 class="mb-4 text-2xl font-bold text-center border-b text-stone-400 dark:text-stone-200 border-stone-700 dark:border-stone-800">
+    <div class="flex flex-col border rounded border-stone-700">
+      <h1 class="px-4 py-2 text-2xl font-bold text-center border-b text-stone-400 dark:text-stone-200 border-stone-700 dark:border-stone-800">
         Login
       </h1>
 
-      <div class="flex flex-col gap-2 p-4">
+      <form action="" method="post" class="flex flex-col gap-2 p-4">
         <?php
         $label = new Label();
         $label->for = "email-input";
@@ -42,8 +42,8 @@ require 'components/label.php';
         echo $password_input->render();
 
         ?>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 
   <div></div>
