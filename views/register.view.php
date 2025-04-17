@@ -11,7 +11,7 @@ require 'components/button.php';
   <div class="flex items-center justify-center col-span-2">
     <div class="flex flex-col border rounded border-stone-700">
       <h1 class="px-4 py-2 text-2xl font-bold text-center border-b text-stone-400 dark:text-stone-200 border-stone-700 dark:border-stone-800">
-        Login
+        Registrar
       </h1>
 
       <form action="" method="post" class="flex flex-col gap-2 p-4 space-y-2">
@@ -49,9 +49,26 @@ require 'components/button.php';
           ?>
         </div>
 
+        <div>
+          <?php
+          $label = new Label();
+          $label->for = "confirm-password-input";
+          $label->text = "Confirmar Senha";
+          echo $label->render();
+
+          $confirm_password_input = new Input();
+          $confirm_password_input->id = "confirm-password-input";
+          $confirm_password_input->name = "confirm-password";
+          $confirm_password_input->placeholder = "Confirmar Senha";
+          $confirm_password_input->type = InputType::PASSWORD;
+          $confirm_password_input->required = true;
+          echo $confirm_password_input->render();
+          ?>
+        </div>
+
         <?php
         $button = new Button();
-        $button->id = "login-button";
+        $button->id = "register-button";
         $button->name = "login";
         $button->text = "Logar";
         $button->type = ButtonType::SUBMIT;
@@ -61,7 +78,7 @@ require 'components/button.php';
 
       <div>
         <p class="px-4 py-2 text-sm font-bold text-center text-stone-400 dark:text-stone-200">
-          Não tem uma conta? <a href="/register" class="text-lime-500 hover:text-lime-600 dark:text-lime-400 dark:hover:text-lime-300">Registrar</a>
+          Já tem uma conta? <a href="/login" class="text-lime-500 dark:text-lime-400">Faça login</a>
         </p>
       </div>
     </div>
