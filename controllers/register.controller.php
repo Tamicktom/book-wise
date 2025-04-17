@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = $_POST['password'] ?? null;
   $confirm_password = $_POST['confirm-password'] ?? null;
 
-  // Aqui você pode adicionar a lógica de autenticação
   $user = new UserModel();
   $existing_user = $user->getUser($email);
   if ($existing_user) {
