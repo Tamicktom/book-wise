@@ -8,8 +8,8 @@
   <title>BookWise</title>
 </head>
 
-<body class="bg-stone-100 dark:bg-stone-950 text-stone-200">
-  <header class="shadow-lg bg-stone-900">
+<body class="bg-stone-100 dark:bg-stone-950 text-stone-200 flex flex-col items-center justify-start min-h-screen">
+  <header class="shadow-lg bg-stone-900 w-full">
     <nav class="flex justify-between max-w-screen-lg px-8 py-4 mx-auto items-center">
       <a href="/">
         <div class="text-xl font-bold tracking-wider">BookWise</div>
@@ -34,7 +34,7 @@
     </nav>
   </header>
 
-  <main class="flex flex-col items-center justify-start max-w-screen-lg mx-auto space-y-6 pb-20">
+  <main class="flex flex-col items-center justify-start max-w-screen-lg w-full mx-auto space-y-6 pb-20">
     <?php
       require $view;
     ?>
