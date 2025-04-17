@@ -18,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = 'As senhas não coincidem.';
   } else {
     $user->createUser($name, $email, $password);
-    header('Location: /login');
+    $message = 'Usuário cadastrado com sucesso. Você pode fazer login agora.';
+    header('Location: /login?message=' . urlencode($message));
     exit;
   }
 }

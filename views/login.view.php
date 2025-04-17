@@ -4,6 +4,9 @@ require 'components/input.php';
 require 'components/label.php';
 require 'components/button.php';
 
+//grab the message from queryParams
+$message = $_GET['message'] ?? null;
+
 ?>
 
 <div class="grid w-full grid-cols-2 gap-2 pt-6">
@@ -14,8 +17,14 @@ require 'components/button.php';
         Login
       </h1>
 
+      <?php
+      if ($message) {
+        echo "<p class='px-4 py-2 text-sm font-bold text-center text-lime-500 dark:text-lime-400'>$message</p>";
+      }
+      ?>
+
       <form action="" method="POST" class="flex flex-col gap-2 p-4 space-y-2">
-        <div>
+        <div class="flex flex-col w-full gap-2">
           <?php
           $label = new Label();
           $label->for = "email-input";
@@ -32,7 +41,7 @@ require 'components/button.php';
           ?>
         </div>
 
-        <div>
+        <div class="flex flex-col gap-2">
           <?php
           $label = new Label();
           $label->for = "password-input";
