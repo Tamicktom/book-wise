@@ -1,6 +1,7 @@
 <?php
 
 require 'models/user.model.php';
+require 'Validation.php';
 
 $view = 'views/register.view.php';
 
@@ -10,29 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = $_POST['password'] ?? null;
   $confirm_password = $_POST['confirm-password'] ?? null;
 
-  $validations = [];
+  $schema = new Schema([
+    'name' => ['required', 'min:3'],
+    'email' => ['required', 'email'],
+    'password' => ['required', 'min:6'],
+    'confirm_password' => ['required', 'min:6'],
+  ]);
 
-  if (strlen($name) < 3) {
-    $validations[] = 'O nome deve ter pelo menos 3 caracteres.';
-  }
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $validations[] = 'Email inválido.';
-  }
-  if (strlen($password) < 6) {
-    $validations[] = 'A senha deve ter pelo menos 6 caracteres.';
-  }
-  if (strlen($confirm_password) < 6) {
-    $validations[] = 'A confirmação de senha deve ter pelo menos 6 caracteres.';
-  }
-  if ($password !== $confirm_password) {
-    $validations[] = 'As senhas não coincidem.';
-  }
-  if (empty($name) || empty($email) || empty($password) || empty($confirm_password)) {
-    $validations[] = 'Todos os campos são obrigatórios.';
-  }
+  $validation = Validation::parse($schema, $_POST);
 
-  if (count($validations) > 0) {
-    $_SESSION['validations'] = $validations;
+  if (!$validation->isValid()) {
+    $errors = $validation->getErrors();
+    $_SESSION['validations'] = $errors;
     header('Location: /register');
   } else {
     unset($_SESSION['validations']);

@@ -4,6 +4,14 @@ require 'components/input.php';
 require 'components/label.php';
 require 'components/button.php';
 
+$validation_errors = [];
+
+if (isset($_SESSION['validations'])) {
+  $validation_errors = $_SESSION['validations'];
+}
+
+$has_errors = count($validation_errors) > 0;
+
 ?>
 
 <div class="grid w-full grid-cols-2 gap-2 pt-6">
@@ -13,15 +21,6 @@ require 'components/button.php';
       <h1 class="px-4 py-2 text-2xl font-bold text-center border-b text-stone-400 dark:text-stone-200 border-stone-700 dark:border-stone-800">
         Registrar
       </h1>
-
-      <?php
-      if (isset($_SESSION['validations'])) {
-        foreach ($_SESSION['validations'] as $validation) {
-          echo "<p class='px-4 py-2 text-sm font-bold text-center text-red-500 dark:text-red-400'>$validation</p>";
-        }
-        unset($_SESSION['validations']);
-      }
-      ?>
 
       <form action="" method="POST" class="flex flex-col gap-2 p-4 space-y-2">
         <div>
@@ -38,6 +37,10 @@ require 'components/button.php';
           $email_input->type = InputType::TEXT;
           $email_input->required = true;
           echo $email_input->render();
+
+          if ($has_errors && isset($validation_errors['name'])) {
+            echo '<p class="text-sm text-red-500">' . $validation_errors['name'] . '</p>';
+          }
           ?>
         </div>
 
@@ -55,6 +58,10 @@ require 'components/button.php';
           $email_input->type = InputType::EMAIL;
           $email_input->required = true;
           echo $email_input->render();
+
+          if ($has_errors && isset($validation_errors['email'])) {
+            echo '<p class="text-sm text-red-500">' . $validation_errors['email'] . '</p>';
+          }
           ?>
         </div>
 
@@ -72,6 +79,10 @@ require 'components/button.php';
           $password_input->type = InputType::PASSWORD;
           $password_input->required = true;
           echo $password_input->render();
+
+          if ($has_errors && isset($validation_errors['password'])) {
+            echo '<p class="text-sm text-red-500">' . $validation_errors['password'] . '</p>';
+          }
           ?>
         </div>
 
@@ -89,6 +100,10 @@ require 'components/button.php';
           $confirm_password_input->type = InputType::PASSWORD;
           $confirm_password_input->required = true;
           echo $confirm_password_input->render();
+
+          if ($has_errors && isset($validation_errors['confirm_password'])) {
+            echo '<p class="text-sm text-red-500">' . $validation_errors['confirm_password'] . '</p>';
+          }
           ?>
         </div>
 
