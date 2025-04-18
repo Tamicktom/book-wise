@@ -1,22 +1,6 @@
 <?php
 
-/**
- * Final result usage:
- * 
- * $schema = new Schema([
- *  'name' => ['required', 'min:3', 'max:255'],
- *  'email' => ['required', 'email'],
- *  'password' => ['required', 'min:6', 'max:255'],
- *  'confirm_password' => ['required', 'min:6', 'max:255'],
- * ]);
- * 
- * $safeParsed = Validation::parse($schema, $_POST);
- * 
- * if ($safeParsed->isValid()) {
- *  // do something with the data
- * }
- */
-
+require_once 'Internationalization.php';
 
 class Schema
 {
@@ -43,6 +27,32 @@ class Schema
   }
 }
 
+class ValidationError
+{
+  private string $field;
+  private string $code;
+  private string $message;
+
+  public function __construct(string $field, string $code, string $message)
+  {
+    $this->field = $field;
+    $this->code = $code;
+    $this->message = $message;
+  }
+  public function getField(): string
+  {
+    return $this->field;
+  }
+  public function getCode(): string
+  {
+    return $this->code;
+  }
+  public function getMessage(): string
+  {
+    return $this->message;
+  }
+}
+
 class Validation
 {
   private Schema $schema;
@@ -50,11 +60,13 @@ class Validation
   private array $errors = [];
   private array $parsedData = [];
   private bool $isValid = true;
+  private Internationalization $intl;
 
   public function __construct(Schema $schema, array $data)
   {
     $this->schema = $schema;
     $this->data = $data;
+    $this->intl = new Internationalization();
   }
   public static function parse(Schema $schema, array $data)
   {
@@ -71,7 +83,9 @@ class Validation
           $this->applyRule($key, $rule);
         }
       } else {
-        $this->errors[$key] = "Field $key is required.";
+        $msg = $this->intl->t('validation.' . $key . '.errors.required');
+        //serialize the object to store in session
+        $this->errors[$key] = new ValidationError($key, 'required', $msg);
         $this->isValid = false;
       }
     }
@@ -82,25 +96,33 @@ class Validation
     switch ($rule) {
       case 'required':
         if (empty($value)) {
-          $this->errors[$key] = "Field $key is required.";
+          // $this->errors[$key] = "Field $key is required.";
+          $msg = $this->intl->t('validation.' . $key . '.errors.required');
+          $this->errors[$key] = new ValidationError($key, 'required', $msg);
           $this->isValid = false;
         }
         break;
       case 'email':
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-          $this->errors[$key] = "Field $key must be a valid email address.";
+          $msg = $this->intl->t('validation.' . $key . '.errors.invalid');
+          // $this->errors[$key] = "Field $key must be a valid email address.";
+          $this->errors[$key] = new ValidationError($key, 'email', $msg);
           $this->isValid = false;
         }
         break;
       default:
         if (preg_match('/^min:(\d+)$/', $rule, $matches)) {
           if (strlen($value) < (int)$matches[1]) {
-            $this->errors[$key] = "Field $key must be at least {$matches[1]} characters long.";
+            $msg = $this->intl->t('validation.' . $key . '.errors.min', ['min' => $matches[1]]);
+            // $this->errors[$key] = "Field $key must be at least {$matches[1]} characters long.";
+            $this->errors[$key] = new ValidationError($key, 'min', $msg);
             $this->isValid = false;
           }
         } elseif (preg_match('/^max:(\d+)$/', $rule, $matches)) {
           if (strlen($value) > (int)$matches[1]) {
-            $this->errors[$key] = "Field $key must be at most {$matches[1]} characters long.";
+            $msg = $this->intl->t('validation.' . $key . '.errors.max', ['max' => $matches[1]]);
+            // $this->errors[$key] = "Field $key must be at most {$matches[1]} characters long.";
+            $this->errors[$key] = new ValidationError($key, 'max', $msg);
             $this->isValid = false;
           }
         }

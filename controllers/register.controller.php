@@ -1,7 +1,7 @@
 <?php
 
 require 'models/user.model.php';
-require 'Validation.php';
+// require 'Validation.php';
 
 $view = 'views/register.view.php';
 

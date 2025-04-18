@@ -8,6 +8,7 @@ $validation_errors = [];
 
 if (isset($_SESSION['validations'])) {
   $validation_errors = $_SESSION['validations'];
+  // dd($validation_errors);
 }
 
 $has_errors = count($validation_errors) > 0;
@@ -39,7 +40,7 @@ $has_errors = count($validation_errors) > 0;
           echo $email_input->render();
 
           if ($has_errors && isset($validation_errors['name'])) {
-            echo '<p class="text-sm text-red-500">' . $validation_errors['name'] . '</p>';
+            echo '<p class="text-sm text-red-500">' . $validation_errors['name']->getMessage() . '</p>';
           }
           ?>
         </div>
@@ -60,7 +61,7 @@ $has_errors = count($validation_errors) > 0;
           echo $email_input->render();
 
           if ($has_errors && isset($validation_errors['email'])) {
-            echo '<p class="text-sm text-red-500">' . $validation_errors['email'] . '</p>';
+            echo '<p class="text-sm text-red-500">' . $validation_errors['email']->getMessage() . '</p>';
           }
           ?>
         </div>
@@ -81,7 +82,7 @@ $has_errors = count($validation_errors) > 0;
           echo $password_input->render();
 
           if ($has_errors && isset($validation_errors['password'])) {
-            echo '<p class="text-sm text-red-500">' . $validation_errors['password'] . '</p>';
+            echo '<p class="text-sm text-red-500">' . $validation_errors['password']->getMessage() . '</p>';
           }
           ?>
         </div>
@@ -102,7 +103,7 @@ $has_errors = count($validation_errors) > 0;
           echo $confirm_password_input->render();
 
           if ($has_errors && isset($validation_errors['confirm_password'])) {
-            echo '<p class="text-sm text-red-500">' . $validation_errors['confirm_password'] . '</p>';
+            echo '<p class="text-sm text-red-500">' . $validation_errors['confirm_password']->getMessage() . '</p>';
           }
           ?>
         </div>

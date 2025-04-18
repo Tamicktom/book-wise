@@ -8,6 +8,8 @@ $search_input->name = "search";
 $search_input->placeholder = "Pesquisar";
 $search_input->value = $search ?? '';
 
+$_SESSION['search'] = $search_input->value;
+
 ?>
 
 <form action="" class="flex items-center justify-center w-full gap-2 pt-6">

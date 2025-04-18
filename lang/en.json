@@ -1,0 +1,31 @@
+{
+  "hello": "Hello",
+  "validation": {
+    "name": {
+      "errors": {
+        "required": "Name is required",
+        "min": "Name must be at least {min} characters long",
+        "max": "Name must be at most {max} characters long"
+      }
+    },
+    "email": {
+      "errors": {
+        "required": "Email is required",
+        "invalid": "Email is invalid"
+      }
+    },
+    "password": {
+      "errors": {
+        "required": "Password is required",
+        "min": "Password must be at least {min} characters long",
+        "max": "Password must be at most {max} characters long"
+      }
+    },
+    "confirm_password": {
+      "errors": {
+        "required": "Confirm password is required",
+        "match": "Passwords do not match"
+      }
+    }
+  }
+}
