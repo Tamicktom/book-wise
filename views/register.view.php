@@ -14,6 +14,15 @@ require 'components/button.php';
         Registrar
       </h1>
 
+      <?php
+      if (isset($_SESSION['validations'])) {
+        foreach ($_SESSION['validations'] as $validation) {
+          echo "<p class='px-4 py-2 text-sm font-bold text-center text-red-500 dark:text-red-400'>$validation</p>";
+        }
+        unset($_SESSION['validations']);
+      }
+      ?>
+
       <form action="" method="POST" class="flex flex-col gap-2 p-4 space-y-2">
         <div>
           <?php
