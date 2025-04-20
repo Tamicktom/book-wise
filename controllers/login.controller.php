@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Check if password is correct
       if ($user->checkPassword($password)) {
         // Start session and set user data
-        session_start();
         $_SESSION['user'] = $existing_user;
         header('Location: /my-books');
         exit;

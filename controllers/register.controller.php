@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $name = $_POST['name'] ?? null;
   $email = $_POST['email'] ?? null;
   $password = $_POST['password'] ?? null;
-  $confirm_password = $_POST['confirm-password'] ?? null;
+  $confirm_password = $_POST['confirm_password'] ?? null;
 
   $schema = new Schema([
     'name' => ['required', 'min:3'],

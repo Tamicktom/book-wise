@@ -1,3 +1,9 @@
+<?php
+
+$user = $_SESSION['user'] ?? null;
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -23,20 +29,36 @@
         </li>
       </ul>
       <ul>
-        <li>
+        <?php
+        if (!$user) {
+          echo <<<HTML
+          <li>
           <a href="/login" class="hover:underline">
             <button class="cursor-pointer border border-lime-500 text-lime-500 px-4 py-2 rounded font-bold hover:bg-lime-500 hover:text-stone-900 transition-colors">
               Login
             </button>
           </a>
         </li>
+        HTML;
+        } else {
+          echo <<<HTML
+          <li>
+            <a href="/logout" class="hover:underline">
+              <button class="cursor-pointer border border-lime-500 text-lime-500 px-4 py-2 rounded font-bold hover:bg-lime-500 hover:text-stone-900 transition-colors">
+                Logout
+              </button>
+            </a>
+          </li>
+          HTML;
+        }
+        ?>
       </ul>
     </nav>
   </header>
 
   <main class="flex flex-col items-center justify-start max-w-screen-lg w-full mx-auto space-y-6 pb-20">
     <?php
-      require $view;
+    require $view;
     ?>
   </main>
 </body>

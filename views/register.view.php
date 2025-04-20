@@ -96,7 +96,7 @@ $has_errors = count($validation_errors) > 0;
 
           $confirm_password_input = new Input();
           $confirm_password_input->id = "confirm-password-input";
-          $confirm_password_input->name = "confirm-password";
+          $confirm_password_input->name = "confirm_password";
           $confirm_password_input->placeholder = "Confirmar Senha";
           $confirm_password_input->type = InputType::PASSWORD;
           $confirm_password_input->required = true;
