@@ -12,7 +12,8 @@
       "errors": {
         "required": "Email is required",
         "invalid": "Email is invalid",
-        "invalid_credentials": "Invalid email or password"
+        "invalid_credentials": "Invalid email or password",
+        "already_exists": "There is already an account with this email"
       }
     },
     "password": {

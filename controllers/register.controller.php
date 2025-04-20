@@ -30,7 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = new UserModel();
     $existing_user = $user->getUser($email);
     if ($existing_user) {
-      $error = 'Email já cadastrado.';
+      $intl = new Internationalization();
+      $msg = $intl->t('validation.email.errors.already_exists');
+      $_SESSION['validations'] = [
+        'email' => new ValidationError(
+          field: 'email',
+          code: 'already_exists',
+          message: $msg,
+        ),
+      ];
+      header('Location: /register');
+      exit;
     } else {
       $user->createUser($name, $email, $password);
       $message = 'Usuário cadastrado com sucesso. Você pode fazer login agora.';

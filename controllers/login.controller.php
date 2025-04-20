@@ -28,13 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $intl = new Internationalization();
       $msg = $intl->t('validation.email.errors.invalid_credentials');
       $_SESSION['validations'] = [
-        'email' => [
-          new ValidationError(
-            field: 'email',
-            code: 'invalid_credentials',
-            message: $msg,
-          ),
-        ],
+        'email' => new ValidationError(
+          field: 'email',
+          code: 'invalid_credentials',
+          message: $msg,
+        ),
       ];
       header('Location: /login');
       exit;
