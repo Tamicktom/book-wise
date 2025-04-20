@@ -8,7 +8,6 @@ $validation_errors = [];
 
 if (isset($_SESSION['validations'])) {
   $validation_errors = $_SESSION['validations'];
-  // dd($validation_errors);
 }
 
 $has_errors = count($validation_errors) > 0;

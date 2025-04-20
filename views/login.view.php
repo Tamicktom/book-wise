@@ -7,6 +7,14 @@ require 'components/button.php';
 //grab the message from queryParams
 $message = $_GET['message'] ?? null;
 
+$validation_errors = [];
+
+if (isset($_SESSION['validations'])) {
+  $validation_errors = $_SESSION['validations'];
+}
+
+$has_errors = count($validation_errors) > 0;
+
 ?>
 
 <div class="grid w-full grid-cols-2 gap-2 pt-6">
@@ -38,6 +46,10 @@ $message = $_GET['message'] ?? null;
           $email_input->type = InputType::EMAIL;
           $email_input->required = true;
           echo $email_input->render();
+
+          if ($has_errors && isset($validation_errors['email'])) {
+            echo '<p class="text-sm text-red-500">' . $validation_errors['email']->getMessage() . '</p>';
+          }
           ?>
         </div>
 
@@ -55,6 +67,10 @@ $message = $_GET['message'] ?? null;
           $password_input->type = InputType::PASSWORD;
           $password_input->required = true;
           echo $password_input->render();
+
+          if ($has_errors && isset($validation_errors['password'])) {
+            echo '<p class="text-sm text-red-500">' . $validation_errors['password']->getMessage() . '</p>';
+          }
           ?>
         </div>
 
