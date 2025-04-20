@@ -8,6 +8,7 @@ $routes = [
   "/my-books" => "my-books",
   "/login" => "login",
   "/register" => "register",
+  "/logout" => "logout",
 ];
 
 function clearRouteSearchParams($route): String
