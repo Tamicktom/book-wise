@@ -11,7 +11,8 @@
     "email": {
       "errors": {
         "required": "Email is required",
-        "invalid": "Email is invalid"
+        "invalid": "Email is invalid",
+        "invalid_credentials": "Invalid email or password"
       }
     },
     "password": {

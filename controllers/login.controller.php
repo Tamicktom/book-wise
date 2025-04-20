@@ -8,25 +8,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = $_POST['email'] ?? null;
   $password = $_POST['password'] ?? null;
 
-  if ($email && $password) {
+  $schema = new Schema([
+    'email' => ['required', 'email'],
+    'password' => ['required', 'min:6'],
+  ]);
+
+  $validation = Validation::parse($schema, $_POST);
+
+  if ($validation->isValid()) {
+    unset($_SESSION['validations']);
     $user = new UserModel();
     $existing_user = $user->getUser($email);
-    // Check if user exists
-    if ($existing_user) {
-      // Check if password is correct
-      if ($user->checkPassword($password)) {
-        // Start session and set user data
-        $_SESSION['user'] = $existing_user;
-        header('Location: /my-books');
-        exit;
-      } else {
-        $error = 'Senha incorreta.';
-      }
+    // Check if user exists and password is correct
+    if ($existing_user && $user->checkPassword($password)) {
+      $_SESSION['user'] = $existing_user;
+      header('Location: /my-books');
+      exit;
     } else {
-      $error = 'Email não cadastrado.';
+      $intl = new Internationalization();
+      $msg = $intl->t('validation.email.errors.invalid_credentials');
+      $_SESSION['validations'] = [
+        'email' => [
+          new ValidationError(
+            field: 'email',
+            code: 'invalid_credentials',
+            message: $msg,
+          ),
+        ],
+      ];
+      header('Location: /login');
+      exit;
     }
   } else {
-    $error = 'Por favor, preencha todos os campos.';
+    $errors = $validation->getErrors();
+    $_SESSION['validations'] = $errors;
+    header('Location: /login');
   }
 }
 
