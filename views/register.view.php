@@ -4,13 +4,23 @@ require 'components/input.php';
 require 'components/label.php';
 require 'components/button.php';
 
+// $validation_errors = [];
+
+// if (isset($_SESSION['validations'])) {
+//   $validation_errors = $_SESSION['validations'];
+// }
+
+// $has_errors = count($validation_errors) > 0;
+
+$flash = new Flash();
+
 $validation_errors = [];
-
-if (isset($_SESSION['validations'])) {
-  $validation_errors = $_SESSION['validations'];
+$has_errors = $flash->has('errors');
+if ($has_errors) {
+  $validation_errors = $flash->getAndClear('errors');
+} else {
+  $validation_errors = [];
 }
-
-$has_errors = count($validation_errors) > 0;
 
 ?>
 

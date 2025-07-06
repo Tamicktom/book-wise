@@ -20,9 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $validation = Validation::parse($schema, $_POST);
 
+  $flash = new Flash(); // Flash messages handler
+
   if (!$validation->isValid()) {
     $errors = $validation->getErrors();
-    $_SESSION['validations'] = $errors;
+    // $_SESSION['validations'] = $errors;
+    $flash->push('errors', $errors);
     header('Location: /register');
   } else {
     unset($_SESSION['validations']);
@@ -32,13 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($existing_user) {
       $intl = new Internationalization();
       $msg = $intl->t('validation.email.errors.already_exists');
-      $_SESSION['validations'] = [
+      // $_SESSION['validations'] = [
+      //   'email' => new ValidationError(
+      //     field: 'email',
+      //     code: 'already_exists',
+      //     message: $msg,
+      //   ),
+      // ];
+      $flash->push('errors', [
         'email' => new ValidationError(
           field: 'email',
           code: 'already_exists',
           message: $msg,
         ),
-      ];
+      ]);
       header('Location: /register');
       exit;
     } else {

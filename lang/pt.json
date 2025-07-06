@@ -1,3 +1,33 @@
 {
-  "hello": "Olá"
+  "hello": "Olá",
+  "validation": {
+    "name": {
+      "errors": {
+        "required": "Nome é obrigatório",
+        "min": "O nome deve ter pelo menos {min} caracteres",
+        "max": "O nome deve ter no máximo {max} caracteres"
+      }
+    },
+    "email": {
+      "errors": {
+        "required": "E-mail é obrigatório",
+        "invalid": "E-mail inválido",
+        "invalid_credentials": "E-mail ou senha inválidos",
+        "already_exists": "Já existe uma conta com este e-mail"
+      }
+    },
+    "password": {
+      "errors": {
+        "required": "Senha é obrigatória",
+        "min": "A senha deve ter pelo menos {min} caracteres",
+        "max": "A senha deve ter no máximo {max} caracteres"
+      }
+    },
+    "confirm_password": {
+      "errors": {
+        "required": "Confirmação de senha é obrigatória",
+        "match": "As senhas não coincidem"
+      }
+    }
+  }
 }

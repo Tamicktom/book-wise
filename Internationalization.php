@@ -23,6 +23,7 @@ class Internationalization
     $uppercase_language = strtoupper($browser_language);
     $this->lang = match ($uppercase_language) {
       'PT' => AppLanguage::PT,
+      'PT-BR' => AppLanguage::PT,
       'EN' => AppLanguage::EN,
       default => AppLanguage::EN,
     };
