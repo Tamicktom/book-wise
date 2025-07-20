@@ -66,7 +66,7 @@ $has_errors = count($validation_errors) > 0;
       <div class="col-span-3">list</div>
       <div class="border border-stone-700 rounded">
         <h3>Avaliar</h3>
-        <form class="p-4 space-y-4" method="post">
+        <form class="p-4 space-y-4" method="post" action="/avaliation?book_id=<?= htmlspecialchars($book->id, ENT_QUOTES, 'UTF-8') ?>">
           <div class="flex flex-col w-full gap-2">
             <?php
             $label = new Label();
@@ -78,6 +78,7 @@ $has_errors = count($validation_errors) > 0;
             $avaliation_input->id = "avaliation-input";
             $avaliation_input->name = "avaliation";
             $avaliation_input->placeholder = "Escreva sua avaliação aqui";
+            $avaliation_input->value = ""; // Valor inicial vazio
             $avaliation_input->required = true;
             echo $avaliation_input->render();
 
@@ -113,7 +114,7 @@ $has_errors = count($validation_errors) > 0;
           <?php
           $button = new Button();
           $button->id = "avaliation-button";
-          $button->name = "avaliation";
+          $button->name = "submit_avaliation"; // Mudança: nome diferente do textarea
           $button->text = "Enviar Avaliação";
           $button->type = ButtonType::SUBMIT;
           echo $button->render();

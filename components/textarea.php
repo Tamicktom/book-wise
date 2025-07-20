@@ -13,13 +13,15 @@ class Textarea implements Component
 
   public function render(): string
   {
+    $requiredAttr = $this->required ? 'required' : '';
+    
     $textarea = <<<HTML
       <textarea
         id="{$this->id}"
         name="{$this->name}"
         class="{$this->class}"
         placeholder="{$this->placeholder}"
-        required="{$this->required}"
+        {$requiredAttr}
       >{$this->value}</textarea>
     HTML;
 

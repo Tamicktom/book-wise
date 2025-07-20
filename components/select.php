@@ -28,6 +28,8 @@ class Select implements Component
 
   public function render(): string
   {
+    $requiredAttr = $this->required ? 'required' : '';
+    
     $options_html = '';
     foreach ($this->options as $option_value => $option_text) {
       $selected = ($this->value === $option_value) ? 'selected' : '';
@@ -39,7 +41,7 @@ class Select implements Component
         id="{$this->id}"
         name="{$this->name}"
         class="{$this->class}"
-        required="{$this->required}"
+        {$requiredAttr}
       >
         <option value="" disabled selected>{$this->placeholder}</option>
         {$options_html}
