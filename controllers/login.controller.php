@@ -1,6 +1,7 @@
 <?php
 
 require 'models/user.model.php';
+require_once "Validation.php";
 
 $view = 'views/login.view.php';
 
