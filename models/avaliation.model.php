@@ -16,8 +16,8 @@ class Avaliation extends Model
   public function addAvaliation(int $bookId, $userId, float $rating, string $comment): array
   {
     // Validate inputs
-    if ($rating < 0 || $rating > 5) {
-      throw new InvalidArgumentException('Rating must be between 0 and 5.');
+    if ($rating < 1 || $rating > 5) {
+      throw new InvalidArgumentException('Rating must be between 1 and 5.');
     }
 
     $sql = "INSERT INTO avaliations (user_id, book_id, rating, comment) VALUES (:user_id, :book_id, :rating, :comment)";

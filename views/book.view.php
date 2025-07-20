@@ -69,18 +69,35 @@ $has_errors = count($validation_errors) > 0;
         if (count($avaliations) === 0) {
           echo '<p class="text-stone-500 w-full text-center">Nenhuma avaliação encontrada para este livro.</p>';
         } else {
+          function getRating($value): string
+          {
+            $rating = '';
+            $int_from_rating = intval($value);
+            $rest_from_rating = $value - $int_from_rating;
+            $rating = str_repeat('★', $int_from_rating);
+
+            if ($rest_from_rating >= 0.5) {
+              $rating .= '⯪';
+            }
+
+            return $rating;
+          }
+
           foreach ($avaliations as $avaliation) {
             $user_name = htmlspecialchars($avaliation['user_name'], ENT_QUOTES, 'UTF-8');
             $rating = htmlspecialchars($avaliation['rating'], ENT_QUOTES, 'UTF-8');
             $comment = htmlspecialchars($avaliation['comment'], ENT_QUOTES, 'UTF-8');
 
             $rating_color = $rating >= 4 ? 'text-green-500' : ($rating >= 2 ? 'text-yellow-500' : 'text-red-500');
+            $rating = getRating($rating);
 
             echo <<<HTML
               <div class="border border-stone-700 rounded w-full p-2 space-y-2">
                 <div class="flex flex-row justify-between items-center">
                   <h3 class="font-semibold">{$user_name}</h3>
-                  <p class="{$rating_color}">Rating: {$rating}</p>
+                  <p class="{$rating_color}">
+                    {$rating}
+                  </p>
                 </div>
                 <p>{$comment}</p>
               </div>
@@ -125,7 +142,6 @@ $has_errors = count($validation_errors) > 0;
             $rating_select->name = "rating";
             $rating_select->placeholder = "Selecione uma nota";
             $rating_select->options = [
-              '0' => '0',
               '1' => '1',
               '2' => '2',
               '3' => '3',
