@@ -26,7 +26,7 @@ $has_errors = count($validation_errors) > 0;
     style="background-color: #<?= htmlspecialchars($book->predominant_color, ENT_QUOTES, 'UTF-8') ?>40;
        border-color: #<?= htmlspecialchars($book->predominant_color, ENT_QUOTES, 'UTF-8') ?>80;">
     <figure
-      class="col-span-2 flex justify-center items-center border rounded-lg"
+      class="col-span-2 flex justify-center items-center border rounded-lg hover:scale-105 transition-transform duration-300"
       style="border-color: #<?= htmlspecialchars($book->predominant_color, ENT_QUOTES, 'UTF-8') ?>80;">
       <img
         id="<?= htmlspecialchars('book-image-' . $book->id, ENT_QUOTES, 'UTF-8') ?>"
@@ -61,24 +61,26 @@ $has_errors = count($validation_errors) > 0;
     </article>
   </main>
 
-  <div>
-    <h2>Avaliações</h2>
+  <div class="flex flex-col gap-8 pt-8">
     <div class="grid grid-cols-4 gap-4">
-      <div class="col-span-3">
+      <div class="col-span-3 flex flex-col gap-4">
+        <h2 class="text-center w-full font-bold text-2xl">Avaliações</h2>
         <?php
         if (count($avaliations) === 0) {
-          echo '<p class="text-stone-500">Nenhuma avaliação encontrada para este livro.</p>';
+          echo '<p class="text-stone-500 w-full text-center">Nenhuma avaliação encontrada para este livro.</p>';
         } else {
           foreach ($avaliations as $avaliation) {
             $user_name = htmlspecialchars($avaliation['user_name'], ENT_QUOTES, 'UTF-8');
             $rating = htmlspecialchars($avaliation['rating'], ENT_QUOTES, 'UTF-8');
             $comment = htmlspecialchars($avaliation['comment'], ENT_QUOTES, 'UTF-8');
 
+            $rating_color = $rating >= 4 ? 'text-green-500' : ($rating >= 2 ? 'text-yellow-500' : 'text-red-500');
+
             echo <<<HTML
               <div class="border border-stone-700 rounded w-full p-2 space-y-2">
                 <div class="flex flex-row justify-between items-center">
                   <h3 class="font-semibold">{$user_name}</h3>
-                  <p class="text-yellow-500">Rating: {$rating}</p>
+                  <p class="{$rating_color}">Rating: {$rating}</p>
                 </div>
                 <p>{$comment}</p>
               </div>
