@@ -26,3 +26,12 @@ create table
     user_id integer not null references users,
     book_id integer not null references books
   );
+
+create table
+  avaliations (
+    id integer primary key,
+    user_id integer not null references users,
+    book_id integer not null references books,
+    rating real not null,
+    comment text
+  );
