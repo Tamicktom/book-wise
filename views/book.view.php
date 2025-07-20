@@ -106,62 +106,64 @@ $has_errors = count($validation_errors) > 0;
         }
         ?>
       </div>
-      <div class="border border-stone-700 rounded p-4">
-        <h3 class="text-center w-full font-bold text-xl">Avaliar</h3>
-        <form class="space-y-4 pt-2" method="post" action="/avaliation?book_id=<?= htmlspecialchars($book->id, ENT_QUOTES, 'UTF-8') ?>">
-          <div class="flex flex-col w-full gap-2">
+      <?php if (auth()): ?>
+        <div class="border border-stone-700 rounded p-4">
+          <h3 class="text-center w-full font-bold text-xl">Avaliar</h3>
+          <form class="space-y-4 pt-2" method="post" action="/avaliation?book_id=<?= htmlspecialchars($book->id, ENT_QUOTES, 'UTF-8') ?>">
+            <div class="flex flex-col w-full gap-2">
+              <?php
+              $label = new Label();
+              $label->for = "avaliation-input";
+              $label->text = "Avaliação";
+              echo $label->render();
+
+              $avaliation_input = new Textarea();
+              $avaliation_input->id = "avaliation-input";
+              $avaliation_input->name = "avaliation";
+              $avaliation_input->placeholder = "Escreva sua avaliação aqui";
+              $avaliation_input->value = ""; // Valor inicial vazio
+              $avaliation_input->required = true;
+              echo $avaliation_input->render();
+
+              if ($has_errors && isset($validation_errors['avaliation'])) {
+                echo '<p class="text-sm text-red-500">' . $validation_errors['avaliation']->getMessage() . '</p>';
+              }
+              ?>
+            </div>
+
+            <div class="flex flex-col w-full gap-2">
+              <?php
+              $label = new Label();
+              $label->for = "rating-select";
+              $label->text = "Nota";
+              echo $label->render();
+
+              $rating_select = new Select();
+              $rating_select->id = "rating-select";
+              $rating_select->name = "rating";
+              $rating_select->placeholder = "Selecione uma nota";
+              $rating_select->options = [
+                '1' => '1',
+                '2' => '2',
+                '3' => '3',
+                '4' => '4',
+                '5' => '5',
+              ];
+              echo $rating_select->render();
+              ?>
+            </div>
+
             <?php
-            $label = new Label();
-            $label->for = "avaliation-input";
-            $label->text = "Avaliação";
-            echo $label->render();
-
-            $avaliation_input = new Textarea();
-            $avaliation_input->id = "avaliation-input";
-            $avaliation_input->name = "avaliation";
-            $avaliation_input->placeholder = "Escreva sua avaliação aqui";
-            $avaliation_input->value = ""; // Valor inicial vazio
-            $avaliation_input->required = true;
-            echo $avaliation_input->render();
-
-            if ($has_errors && isset($validation_errors['avaliation'])) {
-              echo '<p class="text-sm text-red-500">' . $validation_errors['avaliation']->getMessage() . '</p>';
-            }
+            $button = new Button();
+            $button->id = "avaliation-button";
+            $button->name = "submit_avaliation"; // Mudança: nome diferente do textarea
+            $button->text = "Enviar Avaliação";
+            $button->type = ButtonType::SUBMIT;
+            echo $button->render();
             ?>
-          </div>
-
-          <div class="flex flex-col w-full gap-2">
-            <?php
-            $label = new Label();
-            $label->for = "rating-select";
-            $label->text = "Nota";
-            echo $label->render();
-
-            $rating_select = new Select();
-            $rating_select->id = "rating-select";
-            $rating_select->name = "rating";
-            $rating_select->placeholder = "Selecione uma nota";
-            $rating_select->options = [
-              '1' => '1',
-              '2' => '2',
-              '3' => '3',
-              '4' => '4',
-              '5' => '5',
-            ];
-            echo $rating_select->render();
-            ?>
-          </div>
-
-          <?php
-          $button = new Button();
-          $button->id = "avaliation-button";
-          $button->name = "submit_avaliation"; // Mudança: nome diferente do textarea
-          $button->text = "Enviar Avaliação";
-          $button->type = ButtonType::SUBMIT;
-          echo $button->render();
-          ?>
-        </form>
-      </div>
+          </form>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
 </div>

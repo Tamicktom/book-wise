@@ -19,3 +19,13 @@ function view($view)
 {
   require "views/{$view}.view.php";
 };
+
+
+function auth(): ?array
+{
+  if (!isset($_SESSION['user'])) {
+    return null;
+  }
+
+  return $_SESSION['user'];
+}
