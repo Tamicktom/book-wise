@@ -33,4 +33,20 @@ class BookModel extends Model
 
     return Book::make($queried_book[0]);
   }
+
+  public function getBookAvaliations(string $bookId): array
+  {
+    // SQL query to get all avaliations for a specific book
+    // with the name of the user
+    $sql = "
+      SELECT avaliations.*, users.name AS user_name
+      FROM avaliations
+      JOIN users ON avaliations.user_id = users.id
+      WHERE avaliations.book_id = :id;
+    ";
+
+    $params = ['id' => $bookId];
+
+    return $this->db->query($sql, $params);
+  }
 }

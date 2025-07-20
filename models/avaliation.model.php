@@ -13,19 +13,6 @@ require_once 'models/model.php';
 
 class Avaliation extends Model
 {
-  private array $avaliations = [];
-
-  public function getBookAvaliations(int $bookId): array
-  {
-
-    return [];
-  }
-  public function getUserAvaliations(int $userId): array
-  {
-
-    return [];
-  }
-
   public function addAvaliation(int $bookId, $userId, float $rating, string $comment): array
   {
     // Validate inputs

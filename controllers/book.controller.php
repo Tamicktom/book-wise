@@ -9,5 +9,6 @@ require_once 'models/book.model.php';
 $book_model = new BookModel();
 
 $book = $book_model->getBook($book_id);
+$avaliations = $book_model->getBookAvaliations($book_id);
 
 require 'views/template/app.php';

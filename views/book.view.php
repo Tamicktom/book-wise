@@ -1,5 +1,6 @@
 <?php
 
+//* Components imports
 require 'components/input.php';
 require 'components/label.php';
 require 'components/button.php';
@@ -63,10 +64,32 @@ $has_errors = count($validation_errors) > 0;
   <div>
     <h2>Avaliações</h2>
     <div class="grid grid-cols-4 gap-4">
-      <div class="col-span-3">list</div>
-      <div class="border border-stone-700 rounded">
-        <h3>Avaliar</h3>
-        <form class="p-4 space-y-4" method="post" action="/avaliation?book_id=<?= htmlspecialchars($book->id, ENT_QUOTES, 'UTF-8') ?>">
+      <div class="col-span-3">
+        <?php
+        if (count($avaliations) === 0) {
+          echo '<p class="text-stone-500">Nenhuma avaliação encontrada para este livro.</p>';
+        } else {
+          foreach ($avaliations as $avaliation) {
+            $user_name = htmlspecialchars($avaliation['user_name'], ENT_QUOTES, 'UTF-8');
+            $rating = htmlspecialchars($avaliation['rating'], ENT_QUOTES, 'UTF-8');
+            $comment = htmlspecialchars($avaliation['comment'], ENT_QUOTES, 'UTF-8');
+
+            echo <<<HTML
+              <div class="border border-stone-700 rounded w-full p-2 space-y-2">
+                <div class="flex flex-row justify-between items-center">
+                  <h3 class="font-semibold">{$user_name}</h3>
+                  <p class="text-yellow-500">Rating: {$rating}</p>
+                </div>
+                <p>{$comment}</p>
+              </div>
+            HTML;
+          }
+        }
+        ?>
+      </div>
+      <div class="border border-stone-700 rounded p-4">
+        <h3 class="text-center w-full font-bold text-xl">Avaliar</h3>
+        <form class="space-y-4 pt-2" method="post" action="/avaliation?book_id=<?= htmlspecialchars($book->id, ENT_QUOTES, 'UTF-8') ?>">
           <div class="flex flex-col w-full gap-2">
             <?php
             $label = new Label();
