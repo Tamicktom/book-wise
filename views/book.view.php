@@ -89,23 +89,6 @@ $has_errors = count($validation_errors) > 0;
 
           <div class="flex flex-col w-full gap-2">
             <?php
-            // $label = new Label();
-            // $label->for = "rating-input";
-            // $label->text = "Nota";
-            // echo $label->render();
-
-            // $rating_input = new Input();
-            // $rating_input->type = InputType::NUMBER;
-            // $rating_input->id = "rating-input";
-            // $rating_input->name = "rating";
-            // $rating_input->placeholder = "De 0 a 5";
-            // $rating_input->required = true;
-            // echo $rating_input->render();
-
-            // if ($has_errors && isset($validation_errors['rating'])) {
-            //   echo '<p class="text-sm text-red-500">' . $validation_errors['rating']->getMessage() . '</p>';
-            // }
-
             $label = new Label();
             $label->for = "rating-select";
             $label->text = "Nota";
