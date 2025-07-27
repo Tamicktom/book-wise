@@ -31,3 +31,6 @@ $avaliation = $avaliationModel->addAvaliation(
   rating: (float)$_POST['rating'],
   comment: $_POST['avaliation'] ?? ''
 );
+
+// Send user to the book page
+header("location: /book?id=" . $bookId);
