@@ -3,6 +3,7 @@
 require 'components/input.php';
 require 'components/label.php';
 require 'components/button.php';
+require_once 'Validation.php';
 
 //grab the message from queryParams
 $message = $_GET['message'] ?? null;
@@ -14,6 +15,11 @@ if (isset($_SESSION['validations'])) {
 }
 
 $has_errors = count($validation_errors) > 0;
+
+// unserialize the validation errors to pass to the view
+$validation_errors = array_map(function ($error) {
+  return unserialize(serialize($error), ['allowed_classes' => [ValidationError::class]]);
+}, $validation_errors);
 
 ?>
 
@@ -48,6 +54,7 @@ $has_errors = count($validation_errors) > 0;
           echo $email_input->render();
 
           if ($has_errors && isset($validation_errors['email'])) {
+            // dd($validation_errors['email']);
             echo '<p class="text-sm text-red-500">' . $validation_errors['email']->getMessage() . '</p>';
           }
           ?>
