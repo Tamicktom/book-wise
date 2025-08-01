@@ -18,6 +18,22 @@ if (isset($_SESSION['validations'])) {
 
 $has_errors = count($validation_errors) > 0;
 
+function getRating($value): string
+{
+  $rating = '';
+  $int_from_rating = intval($value);
+  $rest_from_rating = $value - $int_from_rating;
+  $rating = str_repeat('★', $int_from_rating);
+
+  if ($rest_from_rating >= 0.5) {
+    $rating .= '⯪';
+  }
+
+  return $rating;
+}
+
+$total_avaliations = count($avaliations);
+
 ?>
 
 <div class="pt-12">
@@ -69,35 +85,19 @@ $has_errors = count($validation_errors) > 0;
             Avaliações
           </h2>
           <span class="text-stone-500 text-center">
-            <span class="text-stone-500 text-center">
-              <?= htmlspecialchars(count($avaliations), ENT_QUOTES, 'UTF-8') ?> avaliações
-            </span>
-            <span>
-              -
-            </span>
-            <span>
-              Média: <?= htmlspecialchars(number_format($average_rating, 1), ENT_QUOTES, 'UTF-8') ?> estrelas
-            </span>
+            <?php
+            $text = "($total_avaliations)";
+            if ($total_avaliations !== 0) {
+              $text = "($total_avaliations) - Média: " . getRating($average_rating);
+            }
+            echo htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+            ?>
           </span>
         </div>
         <?php
         if (count($avaliations) === 0) {
           echo '<p class="text-stone-500 w-full text-center">Nenhuma avaliação encontrada para este livro.</p>';
         } else {
-          function getRating($value): string
-          {
-            $rating = '';
-            $int_from_rating = intval($value);
-            $rest_from_rating = $value - $int_from_rating;
-            $rating = str_repeat('★', $int_from_rating);
-
-            if ($rest_from_rating >= 0.5) {
-              $rating .= '⯪';
-            }
-
-            return $rating;
-          }
-
           foreach ($avaliations as $avaliation) {
             $user_name = htmlspecialchars($avaliation['user_name'], ENT_QUOTES, 'UTF-8');
             $rating = htmlspecialchars($avaliation['rating'], ENT_QUOTES, 'UTF-8');
