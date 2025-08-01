@@ -49,4 +49,20 @@ class BookModel extends Model
 
     return $this->db->query($sql, $params);
   }
+
+  public function getAverageRating(string $bookId): float
+  {
+    // SQL query to get the average rating of a book
+    $sql = "
+      SELECT AVG(rating) AS average_rating
+      FROM avaliations
+      WHERE book_id = :id;
+    ";
+
+    $params = ['id' => $bookId];
+
+    $result = $this->db->query($sql, $params);
+
+    return (float) ($result[0]['average_rating'] ?? 0);
+  }
 }

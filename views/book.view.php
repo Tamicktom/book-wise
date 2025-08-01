@@ -64,7 +64,22 @@ $has_errors = count($validation_errors) > 0;
   <div class="flex flex-col gap-8 pt-8">
     <div class="grid grid-cols-4 gap-4">
       <div class="col-span-3 flex flex-col gap-4">
-        <h2 class="text-center w-full font-bold text-2xl">Avaliações</h2>
+        <div class="flex flex-col gap-2">
+          <h2 class="text-center w-full font-bold text-2xl">
+            Avaliações
+          </h2>
+          <span class="text-stone-500 text-center">
+            <span class="text-stone-500 text-center">
+              <?= htmlspecialchars(count($avaliations), ENT_QUOTES, 'UTF-8') ?> avaliações
+            </span>
+            <span>
+              -
+            </span>
+            <span>
+              Média: <?= htmlspecialchars(number_format($average_rating, 1), ENT_QUOTES, 'UTF-8') ?> estrelas
+            </span>
+          </span>
+        </div>
         <?php
         if (count($avaliations) === 0) {
           echo '<p class="text-stone-500 w-full text-center">Nenhuma avaliação encontrada para este livro.</p>';
