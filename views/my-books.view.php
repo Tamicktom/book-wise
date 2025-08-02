@@ -52,13 +52,13 @@ $has_errors = count($validation_errors) > 0;
       $label->text = "Autor";
       echo $label->render();
 
-      $avaliation_input = new Input();
-      $avaliation_input->id = "author-input";
-      $avaliation_input->name = "author";
-      $avaliation_input->placeholder = "Nome do autor";
-      $avaliation_input->value = ""; // Valor inicial vazio
-      $avaliation_input->required = true;
-      echo $avaliation_input->render();
+      $author_input = new Input();
+      $author_input->id = "author-input";
+      $author_input->name = "author";
+      $author_input->placeholder = "Nome do autor";
+      $author_input->value = ""; // Valor inicial vazio
+      $author_input->required = true;
+      echo $author_input->render();
 
       if ($has_errors && isset($validation_errors['author'])) {
         echo '<p class="text-sm text-red-500">' . $validation_errors['author']->getMessage() . '</p>';
@@ -73,13 +73,13 @@ $has_errors = count($validation_errors) > 0;
       $label->text = "Descrição";
       echo $label->render();
 
-      $avaliation_input = new Textarea();
-      $avaliation_input->id = "description-input";
-      $avaliation_input->name = "description";
-      $avaliation_input->placeholder = "Descrição";
-      $avaliation_input->value = ""; // Valor inicial vazio
-      $avaliation_input->required = true;
-      echo $avaliation_input->render();
+      $description_input = new Textarea();
+      $description_input->id = "description-input";
+      $description_input->name = "description";
+      $description_input->placeholder = "Descrição";
+      $description_input->value = ""; // Valor inicial vazio
+      $description_input->required = true;
+      echo $description_input->render();
 
       if ($has_errors && isset($validation_errors['description'])) {
         echo '<p class="text-sm text-red-500">' . $validation_errors['description']->getMessage() . '</p>';
@@ -94,13 +94,13 @@ $has_errors = count($validation_errors) > 0;
       $label->text = "Ano de publicação";
       echo $label->render();
 
-      $rating_select = new Select();
-      $rating_select->id = "release_year-select";
-      $rating_select->name = "release_year";
-      $rating_select->placeholder = "Selecione um ano de publicação";
-      $rating_select->options = range(1800, date('Y'));
+      $release_year = new Select();
+      $release_year->id = "release_year-select";
+      $release_year->name = "release_year";
+      $release_year->placeholder = "Selecione um ano de publicação";
+      $release_year->options = range(1800, date('Y'));
 
-      echo $rating_select->render();
+      echo $release_year->render();
       ?>
     </div>
 
@@ -111,14 +111,14 @@ $has_errors = count($validation_errors) > 0;
       $label->text = "Quantidade de páginas";
       echo $label->render();
 
-      $avaliation_input = new Input();
-      $avaliation_input->id = "number_of_pages-input";
-      $avaliation_input->name = "number_of_pages";
-      $avaliation_input->placeholder = "Quantidade de páginas";
-      $avaliation_input->value = ""; // Valor inicial vazio
-      $avaliation_input->required = true;
-      $avaliation_input->type = InputType::NUMBER;
-      echo $avaliation_input->render();
+      $number_of_pages = new Input();
+      $number_of_pages->id = "number_of_pages-input";
+      $number_of_pages->name = "number_of_pages";
+      $number_of_pages->placeholder = "Quantidade de páginas";
+      $number_of_pages->value = ""; // Valor inicial vazio
+      $number_of_pages->required = true;
+      $number_of_pages->type = InputType::NUMBER;
+      echo $number_of_pages->render();
 
       if ($has_errors && isset($validation_errors['number_of_pages'])) {
         echo '<p class="text-sm text-red-500">' . $validation_errors['number_of_pages']->getMessage() . '</p>';
@@ -133,13 +133,13 @@ $has_errors = count($validation_errors) > 0;
       $label->text = "Imagem";
       echo $label->render();
 
-      $avaliation_input = new Input();
-      $avaliation_input->id = "image_url-input";
-      $avaliation_input->name = "image_url";
-      $avaliation_input->placeholder = "Imagem da capa";
-      $avaliation_input->value = ""; // Valor inicial vazio
-      $avaliation_input->required = true;
-      echo $avaliation_input->render();
+      $image_url = new Input();
+      $image_url->id = "image_url-input";
+      $image_url->name = "image_url";
+      $image_url->placeholder = "Imagem da capa";
+      $image_url->value = ""; // Valor inicial vazio
+      $image_url->required = true;
+      echo $image_url->render();
 
       if ($has_errors && isset($validation_errors['image_url'])) {
         echo '<p class="text-sm text-red-500">' . $validation_errors['image_url']->getMessage() . '</p>';
