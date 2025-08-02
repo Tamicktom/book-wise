@@ -4,6 +4,7 @@ require 'components/input.php';
 require 'components/textarea.php';
 require 'components/label.php';
 require 'components/button.php';
+require 'components/select.php';
 
 // create table books
 // (
@@ -98,6 +99,23 @@ $has_errors = count($validation_errors) > 0;
       if ($has_errors && isset($validation_errors['description'])) {
         echo '<p class="text-sm text-red-500">' . $validation_errors['description']->getMessage() . '</p>';
       }
+      ?>
+    </div>
+
+    <div class="flex flex-col w-full gap-2">
+      <?php
+      $label = new Label();
+      $label->for = "release_year-select";
+      $label->text = "Ano de publicação";
+      echo $label->render();
+
+      $rating_select = new Select();
+      $rating_select->id = "release_year-select";
+      $rating_select->name = "release_year";
+      $rating_select->placeholder = "Selecione um ano de publicação";
+      $rating_select->options = range(1800, date('Y'));
+
+      echo $rating_select->render();
       ?>
     </div>
 
