@@ -39,4 +39,7 @@ if (!$validation->isValid()) {
 
   $book = new BookModel();
   $newBook = $book->createBook($validation->getParsedData());
+
+  header("Location: /book/{$newBook['id']}");
+  exit();
 }
