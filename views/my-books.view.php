@@ -119,6 +119,28 @@ $has_errors = count($validation_errors) > 0;
       ?>
     </div>
 
+    <div class="flex flex-col justify-center">
+      <?php
+      $label = new Label();
+      $label->for = "number_of_pages-input";
+      $label->text = "Quantidade de páginas";
+      echo $label->render();
+
+      $avaliation_input = new Input();
+      $avaliation_input->id = "number_of_pages-input";
+      $avaliation_input->name = "number_of_pages";
+      $avaliation_input->placeholder = "Quantidade de páginas";
+      $avaliation_input->value = ""; // Valor inicial vazio
+      $avaliation_input->required = true;
+      $avaliation_input->type = InputType::NUMBER;
+      echo $avaliation_input->render();
+
+      if ($has_errors && isset($validation_errors['number_of_pages'])) {
+        echo '<p class="text-sm text-red-500">' . $validation_errors['number_of_pages']->getMessage() . '</p>';
+      }
+      ?>
+    </div>
+
 
 
     <?php
