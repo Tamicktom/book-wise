@@ -141,6 +141,27 @@ $has_errors = count($validation_errors) > 0;
       ?>
     </div>
 
+    <div class="flex flex-col justify-center">
+      <?php
+      $label = new Label();
+      $label->for = "image_url-input";
+      $label->text = "Imagem";
+      echo $label->render();
+
+      $avaliation_input = new Input();
+      $avaliation_input->id = "image_url-input";
+      $avaliation_input->name = "image_url";
+      $avaliation_input->placeholder = "Imagem da capa";
+      $avaliation_input->value = ""; // Valor inicial vazio
+      $avaliation_input->required = true;
+      echo $avaliation_input->render();
+
+      if ($has_errors && isset($validation_errors['image_url'])) {
+        echo '<p class="text-sm text-red-500">' . $validation_errors['image_url']->getMessage() . '</p>';
+      }
+      ?>
+    </div>
+
 
 
     <?php
