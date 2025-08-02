@@ -6,21 +6,6 @@ require 'components/label.php';
 require 'components/button.php';
 require 'components/select.php';
 
-// create table books
-// (
-//     id                integer
-//         primary key,
-//     title             varchar(255),
-//     author            varchar(255),
-//     description       text,
-//     release_year      integer,
-//     rating            real,
-//     number_of_pages   integer,
-//     image_url         varchar(2047),
-//     rating_quantity   integer    default 0 not null,
-//     predominant_color varchar(6) default 'FFFFFF'
-// );
-
 $validation_errors = [];
 
 if (isset($_SESSION['validations'])) {
@@ -38,7 +23,7 @@ $has_errors = count($validation_errors) > 0;
 </div>
 
 <div class="flex flex-col justify-center">
-  <form action="/create-book" method="post">
+  <form action="/create-book" method="POST">
     <div class="flex flex-col w-full gap-2">
       <?php
       $label = new Label();
@@ -46,13 +31,13 @@ $has_errors = count($validation_errors) > 0;
       $label->text = "Título";
       echo $label->render();
 
-      $avaliation_input = new Input();
-      $avaliation_input->id = "title-input";
-      $avaliation_input->name = "title";
-      $avaliation_input->placeholder = "Nome do livro";
-      $avaliation_input->value = ""; // Valor inicial vazio
-      $avaliation_input->required = true;
-      echo $avaliation_input->render();
+      $title_input = new Input();
+      $title_input->id = "title-input";
+      $title_input->name = "title";
+      $title_input->placeholder = "Nome do livro";
+      $title_input->value = ""; // Valor inicial vazio
+      $title_input->required = true;
+      echo $title_input->render();
 
       if ($has_errors && isset($validation_errors['title'])) {
         echo '<p class="text-sm text-red-500">' . $validation_errors['title']->getMessage() . '</p>';
@@ -161,8 +146,6 @@ $has_errors = count($validation_errors) > 0;
       }
       ?>
     </div>
-
-
 
     <?php
     $button = new Button();
