@@ -24,6 +24,13 @@ $has_errors = count($validation_errors) > 0;
 
 <div class="flex flex-col justify-center">
   <form action="/create-book" method="POST">
+    <input
+      name="rating"
+      id="rating-input"
+      type="number"
+      value="5"
+      class="hidden" />
+
     <div class="flex flex-col w-full gap-2">
       <?php
       $label = new Label();
@@ -90,17 +97,22 @@ $has_errors = count($validation_errors) > 0;
     <div class="flex flex-col w-full gap-2">
       <?php
       $label = new Label();
-      $label->for = "release_year-select";
+      $label->for = "release_year-input";
       $label->text = "Ano de publicação";
       echo $label->render();
 
-      $release_year = new Select();
+      $release_year = new Input();
       $release_year->id = "release_year-select";
       $release_year->name = "release_year";
       $release_year->placeholder = "Selecione um ano de publicação";
-      $release_year->options = range(1800, date('Y'));
-
+      $release_year->value = ""; // Valor inicial vazio
+      $release_year->required = true;
+      $release_year->type = InputType::NUMBER;
       echo $release_year->render();
+
+      if ($has_errors && isset($validation_errors['release_year'])) {
+        echo '<p class="text-sm text-red-500">' . $validation_errors['release_year']->getMessage() . '</p>';
+      }
       ?>
     </div>
 

@@ -69,8 +69,8 @@ class BookModel extends Model
   public function createBook(array $bookData): array
   {
     $sql = "
-      INSERT INTO books (title, author, description, release_year, rating, number_of_pages, image_url, predominant_color)
-      VALUES (:title, :author, :description, :release_year, :rating, :number_of_pages, :image_url, :predominant_color)
+      INSERT INTO books (title, author, description, release_year, rating, number_of_pages, image_url)
+      VALUES (:title, :author, :description, :release_year, :rating, :number_of_pages, :image_url)
     ";
 
     $params = [
@@ -81,7 +81,6 @@ class BookModel extends Model
       'rating' => $bookData['rating'],
       'number_of_pages' => $bookData['number_of_pages'],
       'image_url' => $bookData['image_url'],
-      'predominant_color' => $bookData['predominant_color']
     ];
 
     return $this->db->query($sql, $params);

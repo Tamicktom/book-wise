@@ -4,6 +4,8 @@ require 'models/book.model.php';
 require_once "Validation.php";
 require_once "Flash.php";
 
+// dd($_POST);
+
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
   header("Location: /my-books");
   exit();
@@ -18,12 +20,12 @@ if (!auth()) {
 $schema = new Schema([
   'title' => ['required', 'min:3'],
   'author' => ['required', 'min:3'],
-  'description' => ['required', 'min:10'],
+  'description' => ['required', 'min:3'],
   'release_year' => ['required', 'integer', 'min:1900', 'max:' . date('Y')],
-  'rating' => ['required', 'integer', 'min: 1', 'max: 5'],
+  'rating' => ['required', 'integer', 'max: 5'],
   'number_of_pages' => ['required', 'integer', 'min:1'],
   'image_url' => ['required', 'url'],
-  'predominant_color' => ['required', 'hex_color'],
+  // 'predominant_color' => ['required', 'hex_color'],
 ]);
 
 $validation = Validation::parse($schema, $_POST);

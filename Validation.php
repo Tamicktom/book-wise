@@ -79,8 +79,17 @@ class Validation
     foreach ($this->schema->getRules() as $key => $rules) {
       if (isset($this->data[$key])) {
         $this->parsedData[$key] = $this->data[$key];
+
+        $isInteger = false;
+
+        foreach ($rules as $subRule) {
+          if ($subRule === "integer") {
+            $isInteger = true;
+          }
+        }
+
         foreach ($rules as $rule) {
-          $this->applyRule($key, $rule);
+          $this->applyRule($key, $rule, $isInteger);
         }
       } else {
         $msg = $this->intl->t('validation.' . $key . '.errors.required');
@@ -90,9 +99,10 @@ class Validation
       }
     }
   }
-  private function applyRule($key, $rule)
+  private function applyRule(string $key, string $rule, bool $isInteger)
   {
     $value = $this->data[$key];
+
     switch ($rule) {
       case 'required':
         if (empty($value)) {
@@ -135,19 +145,38 @@ class Validation
         }
         break;
       default:
-        if (preg_match('/^min:(\d+)$/', $rule, $matches)) {
-          if (strlen($value) < (int)$matches[1]) {
-            $msg = $this->intl->t('validation.' . $key . '.errors.min', ['min' => $matches[1]]);
-            // $this->errors[$key] = "Field $key must be at least {$matches[1]} characters long.";
-            $this->errors[$key] = new ValidationError($key, 'min', $msg);
-            $this->isValid = false;
+        if ($isInteger) {
+          if (preg_match('/^min:(\d+)$/', $rule, $matches)) {
+            if ((int)$value < (int)$matches[1]) {
+              echo "$value < $matches[1] | ";
+              $msg = $this->intl->t('validation.' . $key . '.errors.min', ['min' => $matches[1]]);
+              // $this->errors[$key] = "Field $key must be at least {$matches[1]} characters long.";
+              $this->errors[$key] = new ValidationError($key, 'min', $msg);
+              $this->isValid = false;
+            }
+          } elseif (preg_match('/^max:(\d+)$/', $rule, $matches)) {
+            if ((int)$value > (int)$matches[1]) {
+              $msg = $this->intl->t('validation.' . $key . '.errors.max', ['max' => $matches[1]]);
+              // $this->errors[$key] = "Field $key must be at most {$matches[1]} characters long.";
+              $this->errors[$key] = new ValidationError($key, 'max', $msg);
+              $this->isValid = false;
+            }
           }
-        } elseif (preg_match('/^max:(\d+)$/', $rule, $matches)) {
-          if (strlen($value) > (int)$matches[1]) {
-            $msg = $this->intl->t('validation.' . $key . '.errors.max', ['max' => $matches[1]]);
-            // $this->errors[$key] = "Field $key must be at most {$matches[1]} characters long.";
-            $this->errors[$key] = new ValidationError($key, 'max', $msg);
-            $this->isValid = false;
+        } else {
+          if (preg_match('/^min:(\d+)$/', $rule, $matches)) {
+            if (strlen($value) < (int)$matches[1]) {
+              $msg = $this->intl->t('validation.' . $key . '.errors.min', ['min' => $matches[1]]);
+              // $this->errors[$key] = "Field $key must be at least {$matches[1]} characters long.";
+              $this->errors[$key] = new ValidationError($key, 'min', $msg);
+              $this->isValid = false;
+            }
+          } elseif (preg_match('/^max:(\d+)$/', $rule, $matches)) {
+            if (strlen($value) > (int)$matches[1]) {
+              $msg = $this->intl->t('validation.' . $key . '.errors.max', ['max' => $matches[1]]);
+              // $this->errors[$key] = "Field $key must be at most {$matches[1]} characters long.";
+              $this->errors[$key] = new ValidationError($key, 'max', $msg);
+              $this->isValid = false;
+            }
           }
         }
         break;
