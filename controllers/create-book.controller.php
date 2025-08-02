@@ -2,6 +2,7 @@
 
 require 'models/book.model.php';
 require_once "Validation.php";
+require_once "Flash.php";
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
   header("Location: /my-books");
