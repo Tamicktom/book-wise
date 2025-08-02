@@ -65,4 +65,25 @@ class BookModel extends Model
 
     return (float) ($result[0]['average_rating'] ?? 0);
   }
+
+  public function createBook(array $bookData): array
+  {
+    $sql = "
+      INSERT INTO books (title, author, description, release_year, rating, number_of_pages, image_url, predominant_color)
+      VALUES (:title, :author, :description, :release_year, :rating, :number_of_pages, :image_url, :predominant_color)
+    ";
+
+    $params = [
+      'title' => $bookData['title'],
+      'author' => $bookData['author'],
+      'description' => $bookData['description'],
+      'release_year' => $bookData['release_year'],
+      'rating' => $bookData['rating'],
+      'number_of_pages' => $bookData['number_of_pages'],
+      'image_url' => $bookData['image_url'],
+      'predominant_color' => $bookData['predominant_color']
+    ];
+
+    return $this->db->query($sql, $params);
+  }
 }

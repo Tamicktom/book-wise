@@ -110,6 +110,30 @@ class Validation
           $this->isValid = false;
         }
         break;
+      case 'integer':
+        if (!filter_var($value, FILTER_VALIDATE_INT)) {
+          $msg = $this->intl->t('validation.' . $key . '.errors.integer');
+          // $this->errors[$key] = "Field $key must be an integer.";
+          $this->errors[$key] = new ValidationError($key, 'integer', $msg);
+          $this->isValid = false;
+        }
+        break;
+      case 'url':
+        if (!filter_var($value, FILTER_VALIDATE_URL)) {
+          $msg = $this->intl->t('validation.' . $key . '.errors.url');
+          // $this->errors[$key] = "Field $key must be a valid URL.";
+          $this->errors[$key] = new ValidationError($key, 'url', $msg);
+          $this->isValid = false;
+        }
+        break;
+      case 'hex_color':
+        if (!preg_match('/^#?[0-9A-Fa-f]{6}$/', $value)) {
+          $msg = $this->intl->t('validation.' . $key . '.errors.hex_color');
+          // $this->errors[$key] = "Field $key must be a valid hex color code.";
+          $this->errors[$key] = new ValidationError($key, 'hex_color', $msg);
+          $this->isValid = false;
+        }
+        break;
       default:
         if (preg_match('/^min:(\d+)$/', $rule, $matches)) {
           if (strlen($value) < (int)$matches[1]) {
