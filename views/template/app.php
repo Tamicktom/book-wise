@@ -24,9 +24,11 @@ $user = $_SESSION['user'] ?? null;
         <li>
           <a href="/" class="text-lime-500">Explorar</a>
         </li>
-        <li>
-          <a href="/my-books" class="hover:underline">Meus Livros</a>
-        </li>
+        <?php if (auth() != null): ?>
+          <li>
+            <a href="/my-books" class="hover:underline">Meus Livros</a>
+          </li>
+        <?php endif; ?>
       </ul>
       <ul>
         <?php
