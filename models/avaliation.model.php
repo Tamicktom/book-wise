@@ -30,20 +30,18 @@ class Avaliation extends Model
 
     $addAvaliationResult = $this->db->query($sql, $params);
 
-    $sql = "SELECT rating, rating_quantity FROM books WHERE id = :book_id";
+    // Calculate new average rating based on all avaliation records
+    $sql = "SELECT AVG(rating) as average_rating, COUNT(*) as total_avaliations FROM avaliations WHERE book_id = :book_id";
     $params = [
       'book_id' => $bookId,
     ];
-    $bookData = $this->db->query($sql, $params)[0];
+    $avaliationStats = $this->db->query($sql, $params)[0];
 
-    $totalAvaliationsQuantity = $bookData["rating_quantity"];
-    $averageRating = $bookData["rating"];
-
-    $newAverageRating = ($averageRating + $rating) / 2;
-    $newRatingQuantity = $totalAvaliationsQuantity + 1;
+    $newAverageRating = (float)$avaliationStats["average_rating"];
+    $newRatingQuantity = (int)$avaliationStats["total_avaliations"];
 
     // Update book rating and rating_quantity
-    $sql = "UPDATE books SET (rating, rating_quantity) = (:rating, :rating_quantity) WHERE (id) = (:book_id)";
+    $sql = "UPDATE books SET rating = :rating, rating_quantity = :rating_quantity WHERE id = :book_id";
     $params = [
       "rating_quantity" => $newRatingQuantity,
       "rating" => $newAverageRating,
