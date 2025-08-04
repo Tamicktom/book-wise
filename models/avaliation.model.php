@@ -28,6 +28,30 @@ class Avaliation extends Model
       'comment' => $comment
     ];
 
-    return $this->db->query($sql, $params);
+    $addAvaliationResult = $this->db->query($sql, $params);
+
+    $sql = "SELECT rating, rating_quantity FROM books WHERE id = :book_id";
+    $params = [
+      'book_id' => $bookId,
+    ];
+    $bookData = $this->db->query($sql, $params)[0];
+
+    $totalAvaliationsQuantity = $bookData["rating_quantity"];
+    $averageRating = $bookData["rating"];
+
+    $newAverageRating = ($averageRating + $rating) / 2;
+    $newRatingQuantity = $totalAvaliationsQuantity + 1;
+
+    // Update book rating and rating_quantity
+    $sql = "UPDATE books SET (rating, rating_quantity) = (:rating, :rating_quantity) WHERE (id) = (:book_id)";
+    $params = [
+      "rating_quantity" => $newRatingQuantity,
+      "rating" => $newAverageRating,
+      "book_id" => $bookId
+    ];
+
+    $this->db->query($sql, $params);
+
+    return $addAvaliationResult;
   }
 }
