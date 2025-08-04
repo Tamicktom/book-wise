@@ -71,7 +71,7 @@ $total_avaliations = count($avaliations);
       </div>
       <p
         id="<?= htmlspecialchars('book-description-' . $book->id, ENT_QUOTES, 'UTF-8') ?>"
-        class="text-stone-400 h-fit line-clamp-3">
+        class="text-stone-400 w-full">
         <?= htmlspecialchars($book->description, ENT_QUOTES, 'UTF-8') ?>
       </p>
     </article>
