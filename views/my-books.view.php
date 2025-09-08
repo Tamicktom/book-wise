@@ -35,7 +35,7 @@ $has_errors = count($validation_errors) > 0;
   </section>
 
   <div class="flex flex-col justify-center col-span-5 lg:col-span-2 p-4 lg:p-2">
-    <form action="/create-book" method="POST">
+    <form action="/create-book" method="POST" enctype="multipart/form-data">
       <input
         name="rating"
         id="rating-input"
@@ -153,20 +153,20 @@ $has_errors = count($validation_errors) > 0;
       <div class="flex flex-col justify-center">
         <?php
         $label = new Label();
-        $label->for = "image_url-input";
+        $label->for = "image-input";
         $label->text = "Imagem";
         echo $label->render();
+        $image = new Input();
+        $image->id = "image-input";
+        $image->name = "image";
+        $image->placeholder = "Imagem da capa";
+        $image->value = ""; // Valor inicial vazio
+        $image->type = InputType::FILE;
+        $image->required = true;
+        echo $image->render();
 
-        $image_url = new Input();
-        $image_url->id = "image_url-input";
-        $image_url->name = "image_url";
-        $image_url->placeholder = "Imagem da capa";
-        $image_url->value = ""; // Valor inicial vazio
-        $image_url->required = true;
-        echo $image_url->render();
-
-        if ($has_errors && isset($validation_errors['image_url'])) {
-          echo '<p class="text-sm text-red-500">' . $validation_errors['image_url']->getMessage() . '</p>';
+        if ($has_errors && isset($validation_errors['image'])) {
+          echo '<p class="text-sm text-red-500">' . $validation_errors['image']->getMessage() . '</p>';
         }
         ?>
       </div>

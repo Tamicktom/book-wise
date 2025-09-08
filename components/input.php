@@ -6,6 +6,7 @@ enum InputType: string
   case EMAIL = "email";
   case PASSWORD = "password";
   case NUMBER = "number";
+  case FILE = "file";
 }
 
 class Input

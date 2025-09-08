@@ -144,6 +144,13 @@ class Validation
           $this->isValid = false;
         }
         break;
+      case 'file': // files can be validate with mime type, size, etc.
+        if (!is_uploaded_file($_FILES[$key]['tmp_name'])) {
+          $msg = $this->intl->t('validation.' . $key . '.errors.file');
+          $this->errors[$key] = new ValidationError($key, 'file', $msg);
+          $this->isValid = false;
+        }
+        break;
       default:
         if ($isInteger) {
           if (preg_match('/^min:(\d+)$/', $rule, $matches)) {

@@ -66,11 +66,12 @@ class BookModel extends Model
     return (float) ($result[0]['average_rating'] ?? 0);
   }
 
-  public function createBook(array $bookData): array
+  public function createBook(array $bookData): Book
   {
     $sql = "
       INSERT INTO books (title, author, description, release_year, rating, number_of_pages, image_url)
       VALUES (:title, :author, :description, :release_year, :rating, :number_of_pages, :image_url)
+      RETURNING *
     ";
 
     $params = [
@@ -83,6 +84,8 @@ class BookModel extends Model
       'image_url' => $bookData['image_url'],
     ];
 
-    return $this->db->query($sql, $params);
+    $result = $this->db->query($sql, $params);
+
+    return Book::make($result[0]);
   }
 }
